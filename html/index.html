@@ -22,14 +22,13 @@
                 </div>
     
                 <div class="block-container">
-    
-                    <div class="block-code">
+                    <div class="block-code" draggable="true" data-type="start">
                         <div class="block-header">
                             <span class="block-title">Начало программы</span>
                         </div>
                     </div>
 
-                    <div class="block-code">
+                    <div class="block-code" draggable="true" data-type="var">
                         <div class="block-header">
                             <span class="block-title">Объявление переменных</span>
                         </div>
@@ -40,7 +39,7 @@
                         </div>
                     </div>
     
-                    <div class="block-code">
+                    <div class="block-code" draggable="true" data-type="assign">
                         <div class="block-header">
                             <span class="block-title">Блок присваивания целочисленной переменной</span>
                         </div>
@@ -53,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="block-code">
+                    <div class="block-code" draggable="true" data-type="assign">
                         <div class="block-header">
                             <span class="block-title">Цикл (while)</span>
                         </div>
@@ -81,7 +80,7 @@
                         </div>
                     </div>
                     
-                    <div class="block-code">
+                    <div class="block-code" draggable="true" data-type="assign">
                         <div class="block-header">
                             <span class="block-title">Если</span>
                         </div>
@@ -101,7 +100,7 @@
                         </div>
                     </div>
     
-                    <div class="block-code">
+                    <div class="block-code" draggable="true" data-type="assign">
                         <div class="block-header">
                             <span class="block-title">Арифметика</span>
                         </div>
@@ -125,17 +124,22 @@
             
         </div>
 
-        <div class="programming-space">
-            <div class="">
+        <div class="right-panel" id="rightPanel">
+            <div class="programming-space" id="proramingSpace">
+              
+            </div>            
+        </div>
 
-            </div>
-            <!-- Тут будут появляться блоки -->
-            
+        <div class="coordinates" id="coordinates">
+            X: 0 | Y: 0 | Zoom: 100%
         </div>
     </div>
 
+
     <script src="../js/script1.js"></script>
     <script src="../js/storage.js"></script>
+    <script src="../scripts/drop_script.js"></script>
+    <script src="../scripts/zoom.js"></script>
 </body>
 </html>
 

@@ -232,24 +232,53 @@ html, body {
     margin: 7px 0 ;
 }
 
-
-.programming-space {
-    /* Растягивание */
-    position: relative;
+.right-panel {
     flex: 1;
-    align-self: stretch;
-    height: auto;
+    margin: o;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    background-color: #2d2d2d;
+    height: 800x;
     min-height: 100%;
-    
-    /* Фон */
-    background-color: #f5f5f5;
+}
+
+.right-panel.panning {
+    cursor: grabbing;
+}
+
+#proramingSpace {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5000px;
+    height: 5000px;
+    transform-origin: 0 0;
+
+
     background-image: radial-gradient(circle at 2px 2px, #c0c0c0 2px, transparent 2px);
     background-size: 25px 25px;
+    background-color: #f5f5f5;
+    background-repeat: repeat;
+
+
+}
+
+.coordinates {
+    position: fixed;
+    bottom: 20px;
+    left: calc(440px + 20px);
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
     
-    /* Чтобы точно занимал место */
-    display: block;
-    content-visibility: visible;
-    contain: none;
+    border: 1px solid #007acc;
+    box-shadow: 0 2px 10px rgba(0,122,204,0.3);
+    backdrop-filter: blur(5px);
+    letter-spacing: 0.5px;
 }
 
 
