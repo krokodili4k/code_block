@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     <div class="content">
 
         <div class="left-panel">
-        
+            <div class="left-panel">
                 <div class="panel-header">
                     <h3>BLOCKS</h3>
                     <button class="clear-block-btn">Очистить код</button>
@@ -31,11 +30,17 @@
 
                     <div class="block-code">
                         <div class="block-header">
+                            <span class="block-title">Конец программы</span>
+                        </div>
+                    </div>
+
+                    <div class="block-code">
+                        <div class="block-header">
                             <span class="block-title">Объявление переменных</span>
                         </div>
                         <div class="block-code-content">
                             <div class="block-varible">
-                                <input type="text" class="input-left" id="input_block_varible" placeholder="переменный 1">
+                                <textarea name="block-of-varibles" id="block_of_variables" placeholder="переменные"></textarea>
                             </div>
                         </div>
                     </div>
@@ -57,27 +62,8 @@
                         <div class="block-header">
                             <span class="block-title">Цикл (while)</span>
                         </div>
-                        
+    
                         <div class="block-code-content">
-                            
-                                <input type="text" class="input-left" id="input_while_block" placeholder="значение 1">
-                                <select class="operator-select" id="selector_while_block">
-                                    <option value=">">></option>
-                                    <option value="<"><</option>
-                                    <option value="==">==</option>
-                                    <option value="!=">!=</option>
-                                    <option value=">=">>=</option>
-                                    <option value="<="><=</option>
-                                </select>
-                                <input type="text" class="input-right" placeholder="значение 2">
-                            
-                            <div class="cycle-blocks">
-
-                            </div>
-                        </div>
-
-                        <div class="block-header">
-                            <span class="block-title">Конец цикла</span>
                         </div>
                     </div>
                     
@@ -87,8 +73,8 @@
                         </div>
                         <div class="block-content">
                             <div class="condition-row">
-                                <input type="text" class="input-left" id="varible1_condition_block" placeholder="значение 1">
-                                <select class="operator-select" id="selector_condition_block">
+                                <input type="text" class="input-left" placeholder="значение 1">
+                                <select class="operator-select" id="operator-select2">
                                     <option value=">">></option>
                                     <option value="<"><</option>
                                     <option value="==">==</option>
@@ -96,7 +82,7 @@
                                     <option value=">=">>=</option>
                                     <option value="<="><=</option>
                                 </select>
-                                <input type="text" class="input-right" id="varible2_condition_block" placeholder="значение 2">
+                                <input type="text" class="input-right" placeholder="значение 2">
                             </div>
                         </div>
                     </div>
@@ -108,34 +94,35 @@
                         <div class="block-content">
                             <div class="condition-row">
     
-                                <input type="text" class="input-left" id="input1_arif_block" placeholder="значение 1">
+                                <input type="text" class="input-left" placeholder="значение 1">
     
-                                <select class="operator-select" id="zaebalo_arifm_block">
+                                <select class="operator-select" id="operator-select3">
                                     <option value="+">+</option>
                                     <option value="-">-</option>
                                     <option value="*">*</option>
                                     <option value="/">/</option>
                                     <option value="%">%</option>
                                 </select>
-                                <input type="text" class="input-right" id="input2_arifm_block" placeholder="значение 2">
+                                <input type="text" class="input-right" placeholder="значение 2">
                             </div>
                         </div>
                     </div>
+
                 </div>
-            
-        </div>
-
-        <div class="programming-space">
-            <div class="">
-
+                <button id="111">Объявление переменных</button>
+                <button id="112">Блок присваивания целочисленной переменной</button>
             </div>
-            <!-- Тут будут появляться блоки -->
-            
         </div>
     </div>
 
     <script src="../js/script1.js"></script>
     <script src="../js/storage.js"></script>
+    <script>
+        let button = document.getElementById("111")
+        button.addEventListener('click', EmptyVars)
+        let button1 = document.getElementById("112")
+        button1.addEventListener('click', AddValue)
+</script>
 </body>
 </html>
 
@@ -143,7 +130,7 @@
 
 
 <!-- Получается, что нам нужно 5 блоков -->
-<!-- Блок объявления пустых переменных --> <!-- In Process -->
+<!-- Блок объявления пустых переменных --> <!-- Gotovo -->
 <!-- Блок перезаписи переменных --> <!-- In Process -->
 <!-- Арифметика (в том числе со скобками и тому подобным) --> <!-- In Process -->
 <!-- Условие -->
