@@ -46,9 +46,9 @@
                         </div>
                         <div class="block-code-content">
                             <div class="block-varible">
-                                <textarea name="block-name-varible" id="textarea_block_varible" placeholder="имя переменной"></textarea>
+                                <input type="text" class="input-left" id="input1_varible_block" placeholder="Имя переменных">
                                 <span>=</span>
-                                <textarea name="block-varible-values" id="textarea_block_values" placeholder="значение переменной"></textarea>
+                                <input type="text" class="input-right" id="input2_varible_block" placeholder="Значение">
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                         </div>
                         
                         <div class="block-code-content">
-                            
+                            <div class="block-cycle-container">
                                 <input type="text" class="input-left" id="input_while_block" placeholder="значение 1">
                                 <select class="operator-select" id="selector_while_block">
                                     <option value=">">></option>
@@ -70,6 +70,7 @@
                                     <option value="<="><=</option>
                                 </select>
                                 <input type="text" class="input-right" placeholder="значение 2">
+                            </div>
                             
                             <div class="cycle-blocks">
 
@@ -111,6 +112,7 @@
                                 <input type="text" class="input-left" id="input1_arif_block" placeholder="значение 1">
     
                                 <select class="operator-select" id="zaebalo_arifm_block">
+                                    <option value="=">=</option>
                                     <option value="+">+</option>
                                     <option value="-">-</option>
                                     <option value="*">*</option>

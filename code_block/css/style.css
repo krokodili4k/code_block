@@ -232,6 +232,11 @@ html, body {
     margin: 7px 0 ;
 }
 
+.block-cycle-container {
+    display: flex;
+    max-width: 100%;
+}
+
 
 .programming-space {
     /* Растягивание */
