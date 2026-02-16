@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
     <div class="content">
 
         <div class="left-panel">
-            <div class="left-panel">
+        
                 <div class="panel-header">
                     <h3>BLOCKS</h3>
                     <button class="clear-block-btn">Очистить код</button>
@@ -28,17 +29,13 @@
                         </div>
                     </div>
 
-                </div>
-
-                <div class="block-container">
-
                     <div class="block-code">
                         <div class="block-header">
                             <span class="block-title">Объявление переменных</span>
                         </div>
                         <div class="block-code-content">
                             <div class="block-varible">
-                                <textarea name="block-of-varibles" id="block_of_variables" placeholder="переменные"></textarea>
+                                <input type="text" class="input-left" id="input_block_varible" placeholder="переменный 1">
                             </div>
                         </div>
                     </div>
@@ -49,9 +46,9 @@
                         </div>
                         <div class="block-code-content">
                             <div class="block-varible">
-                                <textarea name="block-name-varible" id="block-name-varible" placeholder="имя переменной"></textarea>
+                                <textarea name="block-name-varible" id="textarea_block_varible" placeholder="имя переменной"></textarea>
                                 <span>=</span>
-                                <textarea name="block-varible-values" id="block-varible-values" placeholder="значение переменной"></textarea>
+                                <textarea name="block-varible-values" id="textarea_block_values" placeholder="значение переменной"></textarea>
                             </div>
                         </div>
                     </div>
@@ -60,8 +57,27 @@
                         <div class="block-header">
                             <span class="block-title">Цикл (while)</span>
                         </div>
-    
+                        
                         <div class="block-code-content">
+                            
+                                <input type="text" class="input-left" id="input_while_block" placeholder="значение 1">
+                                <select class="operator-select" id="selector_while_block">
+                                    <option value=">">></option>
+                                    <option value="<"><</option>
+                                    <option value="==">==</option>
+                                    <option value="!=">!=</option>
+                                    <option value=">=">>=</option>
+                                    <option value="<="><=</option>
+                                </select>
+                                <input type="text" class="input-right" placeholder="значение 2">
+                            
+                            <div class="cycle-blocks">
+
+                            </div>
+                        </div>
+
+                        <div class="block-header">
+                            <span class="block-title">Конец цикла</span>
                         </div>
                     </div>
                     
@@ -71,8 +87,8 @@
                         </div>
                         <div class="block-content">
                             <div class="condition-row">
-                                <input type="text" class="input-left" placeholder="значение 1">
-                                <select class="operator-select" id="operator-select2">
+                                <input type="text" class="input-left" id="varible1_condition_block" placeholder="значение 1">
+                                <select class="operator-select" id="selector_condition_block">
                                     <option value=">">></option>
                                     <option value="<"><</option>
                                     <option value="==">==</option>
@@ -80,7 +96,7 @@
                                     <option value=">=">>=</option>
                                     <option value="<="><=</option>
                                 </select>
-                                <input type="text" class="input-right" placeholder="значение 2">
+                                <input type="text" class="input-right" id="varible2_condition_block" placeholder="значение 2">
                             </div>
                         </div>
                     </div>
@@ -92,22 +108,29 @@
                         <div class="block-content">
                             <div class="condition-row">
     
-                                <input type="text" class="input-left" placeholder="значение 1">
+                                <input type="text" class="input-left" id="input1_arif_block" placeholder="значение 1">
     
-                                <select class="operator-select" id="operator-select3">
+                                <select class="operator-select" id="zaebalo_arifm_block">
                                     <option value="+">+</option>
                                     <option value="-">-</option>
                                     <option value="*">*</option>
                                     <option value="/">/</option>
                                     <option value="%">%</option>
                                 </select>
-                                <input type="text" class="input-right" placeholder="значение 2">
+                                <input type="text" class="input-right" id="input2_arifm_block" placeholder="значение 2">
                             </div>
                         </div>
                     </div>
-
                 </div>
+            
+        </div>
+
+        <div class="programming-space">
+            <div class="">
+
             </div>
+            <!-- Тут будут появляться блоки -->
+            
         </div>
     </div>
 
