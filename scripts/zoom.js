@@ -13,9 +13,9 @@ function clampTranslation() {
     const canvasHeight = 5000;
     
     const minX = -(canvasWidth * scale - panelRect.width);
-    const maxX = 0;
+    const maxX = 1000;
     const minY = -(canvasHeight * scale - panelRect.height);
-    const maxY = 0;
+    const maxY = 1000;
     
     translateX = Math.max(minX, Math.min(maxX, translateX));
     translateY = Math.max(minY, Math.min(maxY, translateY));
@@ -33,13 +33,13 @@ rightPanel.addEventListener('mousedown', (e) => {
     e.preventDefault();
 });
 
+
 document.addEventListener('mousemove', (e) => {
     if (!isPanning) return;
     
     translateX = e.clientX - startX;
     translateY = e.clientY - startY;
 
-    clampTranslation();
     
     updateTransform();
 });
@@ -55,7 +55,7 @@ rightPanel.addEventListener('wheel', (e) => {
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
     const newScale = scale * delta;
     
-    if (newScale < 0.8 || newScale > 1.5) return;
+    if (newScale < 0.1 || newScale > 2) return;
     
     const rect = rightPanel.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
@@ -69,8 +69,6 @@ rightPanel.addEventListener('wheel', (e) => {
     translateX = mouseX - worldX * scale;
     translateY = mouseY - worldY * scale;
     
-    clampTranslation();
-    
     updateTransform();
 });
 
@@ -81,9 +79,11 @@ function updateTransform() {
 
 function updateCoordinates() {
     if (coordinatesDisplay) {
-        coordinatesDisplay.textContent = `X: ${Math.round(-translateX)} | Y: ${Math.round(-translateY)} | Zoom: ${Math.round(scale * 100)}%`;
+        coordinatesDisplay.textContent = `X: ${Math.round(translateX)} | Y: ${Math.round(translateY)} | Zoom: ${Math.round(scale * 100)}%`;
     }
 }
+
+
 
 
 updateTransform();
