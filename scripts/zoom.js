@@ -22,7 +22,7 @@ function clampTranslation() {
 }
 
 rightPanel.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.canvas-block')) return;
+    if (e.target.closest('.block-code')) return;
     
     isPanning = true;
     rightPanel.classList.add('panning');

@@ -75,7 +75,7 @@
                             </div>
                         </div>
 
-                        <div class="block-header">
+                        <div class="block-footer">
                             <span class="block-title">Конец цикла</span>
                         </div>
                     </div>
@@ -86,8 +86,8 @@
                         </div>
                         <div class="block-content">
                             <div class="condition-row">
-                                <input type="text" class="input-left" id="varible1_condition_block" placeholder="значение 1">
-                                <select class="operator-select" id="selector_condition_block">
+                                <input type="text" class="input-left" id="input1_if_block" placeholder="значение 1">
+                                <select class="operator-select" id="selector_if_block">
                                     <option value=">">></option>
                                     <option value="<"><</option>
                                     <option value="==">==</option>
@@ -95,8 +95,45 @@
                                     <option value=">=">>=</option>
                                     <option value="<="><=</option>
                                 </select>
-                                <input type="text" class="input-right" id="varible2_condition_block" placeholder="значение 2">
+                                <input type="text" class="input-right" id="input2_if_block" placeholder="значение 2">
                             </div>
+                        </div>
+                        <div class="block-footer">
+                            <span class="block-title">Конец если</span>
+                        </div>
+                    </div>
+
+                    <div class="block-code" draggable="true" data-type="assign">
+                        <div class="block-header">
+                            <span class="block-title">Если</span>
+                        </div>
+                        <div class="block-content">
+                            <div class="condition-row">
+                                <input type="text" class="input-left" id="input1_if_else_block" placeholder="значение 1">
+                                <select class="operator-select" id="selector1_if_else_block">
+                                    <option value=">">></option>
+                                    <option value="<"><</option>
+                                    <option value="==">==</option>
+                                    <option value="!=">!=</option>
+                                    <option value=">=">>=</option>
+                                    <option value="<="><=</option>
+                                </select>
+                                <input type="text" class="input-right" id="input2_if_else_block" placeholder="значение 2">
+                            </div>
+                        </div>
+                        <div class="block-footer">
+                            <span class="block-title">Конец если</span>
+                        </div>
+                        <div class="block-header">
+                            <span class="block-title">иначе</span>
+                        </div>
+                        <div class="block-content">
+                            <div class="condition-row">
+                                
+                            </div>
+                        </div>
+                        <div class="block-footer">
+                            <span class="block-title">Конец иначе</span>
                         </div>
                     </div>
     
@@ -107,9 +144,9 @@
                         <div class="block-content">
                             <div class="condition-row">
     
-                                <input type="text" class="input-left" id="input1_arif_block" placeholder="значение 1">
+                                <input type="text" class="input-left" id="input1_arifm_block" placeholder="значение 1">
     
-                                <select class="operator-select" id="zaebalo_arifm_block">
+                                <select class="operator-select" id="input_arifm_block">
                                     <option value="+">+</option>
                                     <option value="-">-</option>
                                     <option value="*">*</option>
@@ -127,6 +164,8 @@
         <div class="right-panel" id="rightPanel">
             <div class="programming-space" id="proramingSpace">
               
+                <!-- В этой зоне должны появляться блоки, ну типо объекты блоков при перетаскивании -->
+
             </div>            
         </div>
 
@@ -138,7 +177,7 @@
 
     <script src="../js/script1.js"></script>
     <script src="../js/storage.js"></script>
-    <script src="../scripts/drop_script.js"></script>
+    <script src="../scripts/drag_drop.js"></script>
     <script src="../scripts/zoom.js"></script>
 </body>
 </html>
@@ -147,8 +186,8 @@
 
 
 <!-- Получается, что нам нужно 5 блоков -->
-<!-- Блок объявления пустых переменных --> <!-- In Process -->
-<!-- Блок перезаписи переменных --> <!-- In Process -->
-<!-- Арифметика (в том числе со скобками и тому подобным) --> <!-- In Process -->
+<!-- Блок объявления пустых переменных --> <!-- sdelano -->
+<!-- Блок перезаписи переменных --> <!-- in progress -->
+<!-- Арифметика (в том числе со скобками и тому подобным) --> <!-- in progress -->
 <!-- Условие -->
 <!-- Цикл -->

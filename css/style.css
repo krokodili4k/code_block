@@ -115,7 +115,8 @@ html, body {
     font-size: 13px;
 }
 
-.block-header {
+.block-header,
+.block-footer {
     background: linear-gradient(145deg, #333 0%, #2a2a2a 100%);
     position: sticky;
     top: 0;
@@ -254,8 +255,6 @@ html, body {
     width: 5000px;
     height: 5000px;
     transform-origin: 0 0;
-
-
     background-image: radial-gradient(circle at 2px 2px, #c0c0c0 2px, transparent 2px);
     background-size: 25px 25px;
     background-color: #f5f5f5;
