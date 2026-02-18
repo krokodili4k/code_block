@@ -7,20 +7,6 @@ let startX, startY;
 let translateX = 0, translateY = 0;
 let scale = 1;
 
-function clampTranslation() {
-    const panelRect = rightPanel.getBoundingClientRect();
-    const canvasWidth = 5000;
-    const canvasHeight = 5000;
-    
-    const minX = -(canvasWidth * scale - panelRect.width);
-    const maxX = 1000;
-    const minY = -(canvasHeight * scale - panelRect.height);
-    const maxY = 1000;
-    
-    translateX = Math.max(minX, Math.min(maxX, translateX));
-    translateY = Math.max(minY, Math.min(maxY, translateY));
-}
-
 rightPanel.addEventListener('mousedown', (e) => {
     if (e.target.closest('.block-code')) return;
     
