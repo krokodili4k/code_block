@@ -1,4 +1,6 @@
-class StatementNode extends ExpressionNode {
+import ExpressionNode from "./ExpressionNode.js";
+
+export default class StatementNode extends ExpressionNode {
     constructor(){
         super();
         this.codeStrings = [];
