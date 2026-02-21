@@ -69,7 +69,4 @@ function updateCoordinates() {
     }
 }
 
-
-
-
 updateTransform();

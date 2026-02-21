@@ -18,7 +18,8 @@
         
                 <div class="panel-header">
                     <h3>BLOCKS</h3>
-                    <button class="clear-block-btn">Очистить код</button>
+                    <button class="btn" id="clear-block-btn">Очистить код</button>
+                    <button class="btn" id="run-program-btn">Запустить код</button>
                 </div>
     
                 <div class="block-container">
@@ -171,7 +172,6 @@
             <div class="programming-space" id="proramingSpace">
               
                 
-
             </div>            
         </div>
 
@@ -180,11 +180,20 @@
         </div>
     </div>
 
+    <div id="console-wrapper">
+        <div id="console-tab" onclick="toggleConsole()">
+            <div id="console-chervon"></div>
+
+        </div>
+        <div id="console-body"></div>
+    </div>
+
 
     <script src="../js/script1.js"></script>
     <script src="../js/storage.js"></script>
     <script src="../scripts/drag_drop.js"></script>
     <script src="../scripts/zoom.js"></script>
+    <script src="../scripts/console.js"></script>
 </body>
 </html>
 
