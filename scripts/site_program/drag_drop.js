@@ -58,8 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const mouseY = (e.clientY - rect.top) / scale;
         
         
-        const blockWidth = 280; 
-        const blockHeight = 100; 
         
         
         newBlock.style.left = (mouseX - blockWidth/2) + 'px';

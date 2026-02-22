@@ -1,11 +1,11 @@
 import ExpressionNode from "../ExpressionNode.js";
 
 export default class AddNode extends ExpressionNode {
-    constructor(leftVelue, numRightValue2){
+    constructor(leftVelue, rightValue){
         super();
         this.type = "ADD";
         this.left = leftVelue;
-        this.right = numRightValue2;
+        this.right = rightValue;
     }
 
     evaluate(storage){
