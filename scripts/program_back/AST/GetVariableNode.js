@@ -7,13 +7,12 @@ export default class GetVariableNode extends ExpressionNode{
         this.name = name;
     }
 
-    evaluate(storage){
-        if (storage.varibles[this.name] !== undefined){
-            return storage.varibles[this.name].value;
+    evaluate(storage) {
 
+        if (storage.variables[this.name] === undefined) {
+            throw new Error(`Переменная "${this.name}" не объявлена`);
         }
         
-        return undefined;
-
+        return storage.variables[this.name].value;
     }
 }

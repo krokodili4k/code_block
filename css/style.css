@@ -84,12 +84,39 @@ html, body {
     color: #fff;
 }
 
-#clear-block-btn{
+#clear-block-btn {
     background: linear-gradient(135deg, #8b2c2c 0%, #a52828 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: inherit;
+    transition: all 0.2s ease;
 }
+
+#clear-block-btn:hover {
+    transform: scale(0.95);
+    background: linear-gradient(135deg, #6b1f1f 0%, #7a1f1f 100%);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
 
 #run-program-btn {
     background: linear-gradient(135deg, #2d6a2d 0%, #5f874c 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+#run-program-btn:hover {
+    transform: scale(0.95);
+    background: linear-gradient(135deg, #1f4f1f 0%, #3e6b2f 100%);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -127,7 +154,7 @@ html, body {
     min-width: auto;
     border-radius: 8px;
     background: linear-gradient(145deg, #2d2d2d 0%, #262626 100%);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    
     font-family: 'Segoe UI', sans-serif;
     font-size: 13px;
 }
@@ -173,6 +200,11 @@ html, body {
     color: white;
     cursor: pointer;
     
+}
+
+.delete-btn:hover{
+    transform: scale(0.95);
+    background-color: #73271f;
 }
 
 
@@ -354,6 +386,7 @@ html, body {
 
 
 #console-tab {
+    gap: 20px;
     height: 30px;
     background: #2d2d2d;
     cursor: pointer;
@@ -473,3 +506,36 @@ html, body {
     bottom: 305px; 
 }
 
+#console-clear-but {
+    position: relative;
+    height: 20px;
+    border: none;
+    border-radius: 12px;
+    background-color: #a0372b;
+    color: white;
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    font-family: 'Courier New', monospace;
+    padding: 0 10px;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#console-clear-but:hover {
+    background-color: #6d231b;
+}
+
+#console-clear-but:active {
+    transform: scale(0.95);
+}
+
+#console-clear-but:focus-visible {
+    outline: 2px solid #e74c3c;
+    outline-offset: 2px;
+}

@@ -144,26 +144,6 @@
                         </div>
                     </div>
     
-                    <div class="block-code" draggable="true" data-type="arithmetic">
-                        <div class="block-header">
-                            <span class="block-title">Арифметика</span>
-                        </div>
-                        <div class="block-code-content">
-                            <div class="condition-row">
-    
-                                <input type="text" class="input-left" id="input1_arifm_block" placeholder="значение 1">
-    
-                                <select class="operator-select" id="input_arifm_block">
-                                    <option value="+">+</option>
-                                    <option value="-">-</option>
-                                    <option value="*">*</option>
-                                    <option value="/">/</option>
-                                    <option value="%">%</option>
-                                </select>
-                                <input type="text" class="input-right" id="input2_arifm_block" placeholder="значение 2">
-                            </div>
-                        </div>
-                    </div>
                 </div>
             
         </div>
@@ -183,7 +163,7 @@
     <div id="console-wrapper">
         <div id="console-tab" onclick="toggleConsole()">
             <div id="console-chervon"></div>
-
+            <button id="console-clear-but" onclick="event.stopPropagation(); clearConsole()">Очистить</button>
         </div>
         <div id="console-body"></div>
     </div>
@@ -197,10 +177,3 @@
 
 
 
-
-<!-- Получается, что нам нужно 5 блоков -->
-<!-- Блок объявления пустых переменных --> <!-- sdelano -->
-<!-- Блок перезаписи переменных --> <!-- in progress -->
-<!-- Арифметика (в том числе со скобками и тому подобным) --> <!-- in progress -->
-<!-- Условие -->
-<!-- Цикл -->
