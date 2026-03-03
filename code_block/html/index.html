@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,8 @@
         
                 <div class="panel-header">
                     <h3>BLOCKS</h3>
-                    <button class="clear-block-btn">Очистить код</button>
+                    <button class="btn" id="clear-block-btn">Очистить код</button>
+                    <button class="btn" id="run-program-btn">Запустить код</button>
                 </div>
     
                 <div class="block-container">
@@ -27,38 +29,37 @@
                         </div>
                     </div>
 
-                    <div class="block-code" draggable="true" data-type="var">
+                    <div class="block-code" draggable="true" data-type="VARIABLE">
                         <div class="block-header">
                             <span class="block-title">Объявление переменных</span>
                         </div>
                         <div class="block-code-content">
                             <div class="block-varible">
-                                <input type="text" class="input-left" id="input_block_varible" placeholder="переменный 1">
+                                <input type="text" class="input-left" id="input_block_varible" placeholder="Введите перменные">
                             </div>
                         </div>
                     </div>
     
-                    <div class="block-code" draggable="true" data-type="assign">
+                    <div class="block-code" draggable="true" data-type="ASSIGN">
                         <div class="block-header">
                             <span class="block-title">Блок присваивания целочисленной переменной</span>
                         </div>
                         <div class="block-code-content">
                             <div class="block-varible">
-                                <input type="text" class="input-left" id="input1_varible_block" placeholder="Имя переменных">
+                                <textarea name="block-name-varible" id="textarea_block_varible" placeholder="имя переменной"></textarea>
                                 <span>=</span>
-                                <input type="text" class="input-right" id="input2_varible_block" placeholder="Значение">
+                                <textarea name="block-varible-values" id="textarea_block_values" placeholder="значение переменной"></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <div class="block-code" draggable="true" data-type="assign">
+                    <div class="block-code" draggable="true" data-type="WHILE">
                         <div class="block-header">
                             <span class="block-title">Цикл (while)</span>
                         </div>
-                        
                         <div class="block-code-content">
-                            <div class="block-cycle-container">
-                                <input type="text" class="input-left" id="input_while_block" placeholder="значение 1">
+                            <div class="condition-row">
+                                <input type="text" class="input-left" id="input1_while_block" placeholder="значение 1">
                                 <select class="operator-select" id="selector_while_block">
                                     <option value=">">></option>
                                     <option value="<"><</option>
@@ -67,27 +68,26 @@
                                     <option value=">=">>=</option>
                                     <option value="<="><=</option>
                                 </select>
-                                <input type="text" class="input-right" placeholder="значение 2">
-                            </div>
-                            
-                            <div class="cycle-blocks">
-
+                                <input type="text" class="input-right" id="input2_while_block" placeholder="значение 2">
                             </div>
                         </div>
+                        <div class="spawn-zone">
 
-                        <div class="block-header">
+                        </div>
+                           
+                        <div class="block-footer">
                             <span class="block-title">Конец цикла</span>
                         </div>
                     </div>
                     
-                    <div class="block-code" draggable="true" data-type="assign">
+                    <div class="block-code" draggable="true" data-type="IF">
                         <div class="block-header">
                             <span class="block-title">Если</span>
                         </div>
-                        <div class="block-content">
+                        <div class="block-code-content">
                             <div class="condition-row">
-                                <input type="text" class="input-left" id="varible1_condition_block" placeholder="значение 1">
-                                <select class="operator-select" id="selector_condition_block">
+                                <input type="text" class="input-left" id="input1_if_block" placeholder="значение 1">
+                                <select class="operator-select" id="selector_if_block">
                                     <option value=">">></option>
                                     <option value="<"><</option>
                                     <option value="==">==</option>
@@ -95,46 +95,83 @@
                                     <option value=">=">>=</option>
                                     <option value="<="><=</option>
                                 </select>
-                                <input type="text" class="input-right" id="varible2_condition_block" placeholder="значение 2">
+                                <input type="text" class="input-right" id="input2_if_block" placeholder="значение 2">
                             </div>
+                            
+                        </div>
+                        <div class="spawn-zone">
+
+                        </div>
+                        <div class="block-footer">
+                            <span class="block-title">Конец если</span>
+                        </div>
+                    </div>
+
+                    <div class="block-code" draggable="true" data-type="IF-ELSE">
+                        <div class="block-header">
+                            <span class="block-title">Если</span>
+                        </div>
+                        <div class="block-code-content">
+                            <div class="condition-row">
+                                <input type="text" class="input-left" id="input1_if_else_block" placeholder="значение 1">
+                                <select class="operator-select" id="selector1_if_else_block">
+                                    <option value=">">></option>
+                                    <option value="<"><</option>
+                                    <option value="==">==</option>
+                                    <option value="!=">!=</option>
+                                    <option value=">=">>=</option>
+                                    <option value="<="><=</option>
+                                </select>
+                                <input type="text" class="input-right" id="input2_if_else_block" placeholder="значение 2">
+                            </div>
+                        </div>
+                        <div class="spawn-zone">
+
+                        </div>
+                        <div class="block-footer">
+                            <span class="block-title">Конец если</span>
+                        </div>
+                        <div class="block-header">
+                            <span class="block-title">иначе</span>
+                        </div>
+                        
+                        <div class="spawn-zone">
+
+                        </div>
+                        
+                        <div class="block-footer">
+                            <span class="block-title">Конец иначе</span>
                         </div>
                     </div>
     
-                    <div class="block-code" draggable="true" data-type="assign">
+                    <div class="block-code" draggable="true" data-type="arithmetic">
                         <div class="block-header">
                             <span class="block-title">Арифметика</span>
                         </div>
-                        <div class="block-content">
+                        <div class="block-code-content">
                             <div class="condition-row">
     
-                                <input type="text" class="input-left" id="input1_arif_block" placeholder="значение 1">
+                                <input type="text" class="input-left" id="input1_arifm_block" placeholder="значение 1">
     
-                                <select class="operator-select" id="zaebalo_arifm_block">
-                                    <option value="=">=</option>
+                                <select class="operator-select" id="input_arifm_block">
                                     <option value="+">+</option>
                                     <option value="-">-</option>
                                     <option value="*">*</option>
                                     <option value="/">/</option>
                                     <option value="%">%</option>
-                                    <option value="=">=</option>
                                 </select>
                                 <input type="text" class="input-right" id="input2_arifm_block" placeholder="значение 2">
                             </div>
                         </div>
                     </div>
                 </div>
-            <div id = "buttons">
-                <button id="100">Объявление</button>
-                <button id="101">Присваивание</button>
-                <button id="102">Арифметика</button>
-                <button id="103">Условие</button>
-                <button id="vs">Variables</button>
-            </div>
+            
         </div>
 
         <div class="right-panel" id="rightPanel">
             <div class="programming-space" id="proramingSpace">
               
+                
             </div>            
         </div>
 
@@ -143,22 +180,18 @@
         </div>
     </div>
 
-    <script src="../js/script1.js"></script>
-    <script src="../js/storage.js"></script>
-    <script src="../scripts/drop_script.js"></script>
-    <script src="../scripts/zoom.js"></script>
-    <script>
-        let button = document.getElementById("100")
-        button.addEventListener('click', EmptyVars)
-        let button1 = document.getElementById("101")
-        button1.addEventListener('click', AddValue)
-        let button2 = document.getElementById("102")
-        button2.addEventListener('click', Arifmetic)
-        let button3 = document.getElementById("103")
-        button3.addEventListener('click', If)
-        let buttonVS = document.getElementById("vs")
-        buttonVS.addEventListener('click', Varrs)
-    </script>
+    <div id="console-wrapper">
+        <div id="console-tab" onclick="toggleConsole()">
+            <div id="console-chervon"></div>
+
+        </div>
+        <div id="console-body"></div>
+    </div>
+
+    <script src="../scripts/site_program/drag_drop.js"></script>
+    <script src="../scripts/site_program/zoom.js"></script>
+    <script src="../scripts/site_program/console.js"></script>
+    <script type="module" src="../scripts/kapot.js"></script>
 </body>
 </html>
 
@@ -166,8 +199,8 @@
 
 
 <!-- Получается, что нам нужно 5 блоков -->
-<!-- Блок объявления пустых переменных --> <!-- Done -->
-<!-- Блок перезаписи переменных --> <!-- Done -->
-<!-- Арифметика (в том числе со скобками и тому подобным) --> <!-- Done -->
-<!-- Условие --> <!-- Done -->
+<!-- Блок объявления пустых переменных --> <!-- sdelano -->
+<!-- Блок перезаписи переменных --> <!-- in progress -->
+<!-- Арифметика (в том числе со скобками и тому подобным) --> <!-- in progress -->
+<!-- Условие -->
 <!-- Цикл -->
