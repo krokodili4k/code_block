@@ -65,7 +65,7 @@ function updateTransform() {
 
 function updateCoordinates() {
     if (coordinatesDisplay) {
-        coordinatesDisplay.textContent = `X: ${Math.round(translateX)} | Y: ${Math.round(translateY)} | Zoom: ${Math.round(scale * 100)}%`;
+        coordinatesDisplay.textContent = `X: ${Math.round(translateX) * -1} | Y: ${Math.round(translateY) * -1} | Zoom: ${Math.round(scale * 100)}%`;
     }
 }
 

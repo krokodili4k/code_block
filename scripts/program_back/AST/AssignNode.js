@@ -15,8 +15,9 @@ export default class AssignNode extends StatementNode {
         const value = this.formula.evaluate(storage);
 
 
-        storage.varibles[variableName].value = value;
+        storage.variables[variableName].value = value;
 
     }
 
 }
+
