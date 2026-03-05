@@ -1,12 +1,10 @@
 
 import AddNode from '../program_back/AST/binary_operations/AddNode.js';
-import DivNode from '../program_back/AST/binary_operations/DivNode.js';
 import MinusNode from '../program_back/AST/binary_operations/MinusNode.js';
 import MultiplicationNode from '../program_back/AST/binary_operations/MultiplicationNode.js';
-import RemainderNode from '../program_back/AST/binary_operations/RemainderNode.js';
 import NumNode from '../program_back/AST/NumNode.js';
 import GetVariableNode from '../program_back/AST/GetVariableNode.js'
-import Storage  from '../storage.js';
+
 
 function parseExpression(exprString) {
     exprString = exprString.replace(/\s+/g, '');
@@ -88,11 +86,9 @@ function BuildNodeTree(ast)
         }
     }
 }
-function Calculate(ast, storage)
-{   let storage = new Storage
-    Ass
+function Calculate(ast, storage){
     const tree = BuildNodeTree(ast)
     return tree.evaluate(storage)
 }
 
-export {parseExpression, Calculate}
+export {parseExpression, Calculate, BuildNodeTree}

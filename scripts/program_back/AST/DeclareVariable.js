@@ -10,11 +10,11 @@ export default class DeclareVariable extends StatementNode {
     }
     
     execute(storage) {
-        if (storage.varibles[this.name]){
-            console.log("Перменная с такимм именим уже существует");
+        if (storage.variables[this.name]){
+            console.log("Перменная/массив с такимм именим уже существует");
         }
 
-        storage.varibles[this.name] = {
+        storage.variables[this.name] = {
             type: this.type,
             name: this.name,
             value: this.value

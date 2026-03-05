@@ -108,10 +108,6 @@ html, body {
     background: linear-gradient(135deg, #1f4f1f 0%, #3e6b2f 100%) !important;
 }
 
-.block-container{
-    
-}
-
 .content {
     
     display: flex;
@@ -146,6 +142,7 @@ html, body {
     min-width: auto;
     border-radius: 8px;
     background: linear-gradient(145deg, #2d2d2d 0%, #262626 100%);
+   
     
     font-family: 'Segoe UI', sans-serif;
     font-size: 13px;
@@ -203,8 +200,8 @@ html, body {
 .operator-select {
     display: flex;
     justify-self: center;
-    height: 32px;
-    width: 57px;
+    min-height: 32px;
+    min-w: 57px;
     margin: 5px;
     padding: 0 10px;
     color: #d4d4d4;
@@ -219,34 +216,7 @@ html, body {
     background-color: #252525;
 }
 
-.block-varible {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px;
-    background-color: #2d2d2d;
-    border: 1px solid #404040;
-    border-radius: 8px;
-    margin: 7px 0 ;
-    width: 100%;
-    
-}
-
-.block-varible textarea {
-    background-color: #1a1a1a;
-    color: #d4d4d4;
-    border: 1px solid #3a3a3a;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    line-height: 1.5;
-    resize: both;
-    min-height: 36px;
-    max-height: 120px;
-    min-width: 120px;
-}
-
+.block-stroke,
 .condition-row {
     display: flex;
     align-items: center;
@@ -256,13 +226,13 @@ html, body {
     border: 1px solid #404040;
     border-radius: 8px;
     margin: 7px 0 ;
-    max-width: 100%;
+    width: 94%;
     
 }
 
-.input-left, .input-right {
+.block-stroke textarea,
+.input {
     flex: 1;
-    
     background-color: #1a1a1a;
     color: #fff; 
     border: 1px solid #3a3a3a;
@@ -281,8 +251,10 @@ html, body {
 .block-code-content {
     justify-content: center;
     display: flex;
+    flex-direction: column;
     gap: 5px;
     padding: 5px;
+    align-items: center;
 }
 
 .cycle-condition {

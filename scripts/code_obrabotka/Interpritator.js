@@ -1,6 +1,14 @@
 import DeclareVariable from '../program_back/AST/DeclareVariable.js';
 import AssignNode from '../program_back/AST/AssignNode.js';
 import NumNode from '../program_back/AST/NumNode.js';
+import PrintNode from '../program_back/AST/PrintNode.js';
+import Storage from '../program_back/Storage.js';
+
+
+import { parseExpression } from './parser.js';
+import { BuildNodeTree } from './parser.js';
+import DeclareArrayNode from '../program_back/AST/DeclareArrayNode.js';
+
 
 class Interpreter {
     constructor() {
@@ -8,8 +16,22 @@ class Interpreter {
     }
 
     createValueNode(value) {
-        if (typeof value === 'string' && !isNaN(value)) {
-            return new NumNode(value);
+      
+        if (typeof value === 'string') {
+           
+            if (!isNaN(value)) {
+                return new NumNode(value);
+            }
+            
+           
+            try {
+                const exprAst = parseExpression(value);      
+                const exprNode = BuildNodeTree(exprAst);    
+                return exprNode;
+            } catch (error) {
+                console.log('Ошибка парсинга "${value}":', error);
+                return new NumNode(value);
+            }
         }
        
         if (typeof value === 'number') {
@@ -22,7 +44,39 @@ class Interpreter {
     createNodeFromJSON(astNode) {
         switch(astNode.type) {
             case 'VARIABLE':
-                return new DeclareVariable(astNode.values.variables);
+                const massVariables = astNode.values.variables;
+                const variablesName = massVariables.split(',').map(s => s.trim());
+
+                const varType = astNode.values.typeVar;
+                const arrSize = Number(astNode.values.arrSize);
+
+                if (varType === 'array' && arrSize > 0 && variablesName){
+                    const declareNodes = variablesName.map(arrayName => {
+                        return new DeclareArrayNode(arrayName, arrSize);
+                    });
+                    return declareNodes;
+                }
+                else if (varType === 'variable' && variablesName){
+                    const declareNodes = variablesName.map(varName => {
+                        return new DeclareVariable(varName);
+                    });
+                    
+                    return declareNodes;
+                }
+            
+            case 'ARRAY':
+                const arrName = astNode.values.arrayName;
+                
+                const arrValuesStr = astNode.values.arrayValues;
+                const arrValues = arrValuesStr.split(',').map(s => {
+                    const trimmed = s.trim();
+                    const num = Number(trimmed);
+                    return new NumNode(num);
+
+                });
+
+                return new DeclareArrayNode(arrName, arrValues);
+                
                 
             case 'ASSIGN':
                 const valueNode = this.createValueNode(astNode.values.variableValue);
@@ -31,6 +85,13 @@ class Interpreter {
                     astNode.values.variableName,
                     valueNode 
                 );
+            
+            case 'PRINT':
+                const printValue = astNode.values.variables;
+
+                const printNode = this.createValueNode(printValue);
+                return new PrintNode(printNode);
+
                 
             default:
                 console.log(`Неизвестный тип: ${astNode.type}`);
@@ -47,14 +108,23 @@ class Interpreter {
         
         if (programAST.body && programAST.body.length > 0) {
             programAST.body.forEach(nodeJSON => {
-                const node = this.createNodeFromJSON(nodeJSON);
-                if (node) {
-                    node.execute(storage);
+                const nodes = this.createNodeFromJSON(nodeJSON);
+
+                if (Array.isArray(nodes)){
+                    nodes.forEach(node => {
+                        if (node){
+                            node.execute(storage);
+                        }
+                    });
+
+                }
+                else {
+                    if (nodes){
+                        nodes.execute(storage);
+                    }
                 }
             });
         }
-        
-        console.log('Переменные:', this.variables);
         
         return this.variables;
     }

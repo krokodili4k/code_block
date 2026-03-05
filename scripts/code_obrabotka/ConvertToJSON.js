@@ -36,15 +36,8 @@ function convertToAST(blocksArray) {
         sourceType: 'module'
     };
     
-    console.log('Преобразованное AST:', programAST);
     return programAST;
 }
 
-const but = document.getElementById("run-program-btn");
-but.addEventListener("click", function() {
-    const blocks = collectBlocksToArray();
-    console.log('Собранные блоки:', blocks);
-    
-    const ast = convertToAST(blocks);
-    console.log('AST:', ast);
-});
+export { convertToAST };
+

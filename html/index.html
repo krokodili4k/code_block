@@ -33,37 +33,71 @@
                         </div>
                     </div>
 
+                    
                     <div class="block-code" draggable="true" data-type="VARIABLE">
                         <div class="block-header">
-                            <span class="block-title">Объявление переменных</span>
+                            <span class="block-title">Объявление переменных/массивов</span>
                         </div>
                         <div class="block-code-content">
-                            <div class="block-varible">
-                                <input type="text" class="input-left" id="input_block_varible" placeholder="Введите перменные">
+                            <div class="block-stroke">
+                                <select class="operator-select" id="selector_variables_block">
+                                        <option value="variable">Переменная</option>
+                                        <option value="array">Массив</option>
+                                </select>
+                                <input type="text" class="input" placeholder="Введите размер массива" >
+                                
+                            </div>
+                            <div class="block-stroke">
+                                <input type="text" class="input" id="input_block_print" placeholder="Введите перменные">
                             </div>
                         </div>
                     </div>
-    
+
+                    <div class="block-code" draggable="true" data-type="ARRAY">
+                        <div class="block-header">
+                            <span class="block-title">Блок присваивания к массивам</span>
+                        </div>
+                        <div class="block-code-content">
+                            <div class="block-stroke">
+                                <textarea name="block-name-varible" class="textarea" id="textarea_block_array" placeholder="имя массива"></textarea>
+                                <span>=</span>
+                                <textarea name="block-varible-values" class="textarea" id="textarea_block_array_values" placeholder="значения массива"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="block-code" draggable="true" data-type="ASSIGN">
                         <div class="block-header">
                             <span class="block-title">Блок присваивания целочисленной переменной</span>
                         </div>
                         <div class="block-code-content">
-                            <div class="block-varible">
+                            <div class="block-stroke">
                                 <textarea name="block-name-varible" id="textarea_block_varible" placeholder="имя переменной"></textarea>
                                 <span>=</span>
                                 <textarea name="block-varible-values" id="textarea_block_values" placeholder="значение переменной"></textarea>
                             </div>
                         </div>
                     </div>
-
+                    
+                    <div class="block-code" draggable="true" data-type="PRINT">
+                        <div class="block-header">
+                            <span class="block-title">Вывод</span>
+                        </div>
+                        <div class="block-code-content">
+                            <div class="block-stroke">
+                                <input type="text" class="input" id="input_block_varible" placeholder="Введите что">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
                     <div class="block-code" draggable="true" data-type="WHILE">
                         <div class="block-header">
                             <span class="block-title">Цикл (while)</span>
                         </div>
                         <div class="block-code-content">
                             <div class="condition-row">
-                                <input type="text" class="input-left" id="input1_while_block" placeholder="значение 1">
+                                <input type="text" class="input" id="input1_while_block" placeholder="значение 1">
                                 <select class="operator-select" id="selector_while_block">
                                     <option value=">">></option>
                                     <option value="<"><</option>
@@ -72,7 +106,7 @@
                                     <option value=">=">>=</option>
                                     <option value="<="><=</option>
                                 </select>
-                                <input type="text" class="input-right" id="input2_while_block" placeholder="значение 2">
+                                <input type="text" class="input" id="input2_while_block" placeholder="значение 2">
                             </div>
                         </div>
                         <div class="spawn-zone">
@@ -90,7 +124,7 @@
                         </div>
                         <div class="block-code-content">
                             <div class="condition-row">
-                                <input type="text" class="input-left" id="input1_if_block" placeholder="значение 1">
+                                <input type="text" class="input" id="input1_if_block" placeholder="значение 1">
                                 <select class="operator-select" id="selector_if_block">
                                     <option value=">">></option>
                                     <option value="<"><</option>
@@ -99,7 +133,7 @@
                                     <option value=">=">>=</option>
                                     <option value="<="><=</option>
                                 </select>
-                                <input type="text" class="input-right" id="input2_if_block" placeholder="значение 2">
+                                <input type="text" class="input" id="input2_if_block" placeholder="значение 2">
                             </div>
                             
                         </div>
@@ -117,7 +151,7 @@
                         </div>
                         <div class="block-code-content">
                             <div class="condition-row">
-                                <input type="text" class="input-left" id="input1_if_else_block" placeholder="значение 1">
+                                <input type="text" class="input" id="input1_if_else_block" placeholder="значение 1">
                                 <select class="operator-select" id="selector1_if_else_block">
                                     <option value=">">></option>
                                     <option value="<"><</option>
@@ -126,7 +160,7 @@
                                     <option value=">=">>=</option>
                                     <option value="<="><=</option>
                                 </select>
-                                <input type="text" class="input-right" id="input2_if_else_block" placeholder="значение 2">
+                                <input type="text" class="input" id="input2_if_else_block" placeholder="значение 2">
                             </div>
                         </div>
                         <div class="spawn-zone">
@@ -154,6 +188,7 @@
 
         <div class="right-panel" id="rightPanel">
             <div class="programming-space" id="proramingSpace">
+                
               
                 
             </div>            
@@ -177,6 +212,7 @@
     <script src="../scripts/site_program/console.js"></script>
     <script type="module" src="../scripts/kapot.js"></script>
     <script src="../scripts/block-manager.js"></script>
+    
 </body>
 </html>
 

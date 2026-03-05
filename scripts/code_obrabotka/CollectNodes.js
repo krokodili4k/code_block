@@ -25,20 +25,40 @@ function collectBlocksToArray() {
         
         switch(block.dataset.type) {
             case 'VARIABLE':
+                const inputs = block.querySelectorAll('.input');
+                const typeVar = block.querySelector('.operator-select');
 
-                const varInput = block.querySelector('.input-left');
-                if (varInput) {
-                    blockInfo.values.variables = varInput.value;
-                    console.log('VARIABLE values:', blockInfo.values); // Отладка
+                if (inputs[1] || (inputs[0] && inputs[1])) {
+                    blockInfo.values.typeVar = typeVar.value;
+                    blockInfo.values.arrSize = inputs[0].value;
+                    blockInfo.values.variables = inputs[1].value;
+                }
+                break;
+            
+            case 'ARRAY':
+                const textareasArr = block.querySelectorAll('textarea');
+
+                if (textareasArr.length >= 2){
+                    blockInfo.values.arrayName = textareasArr[0].value;
+                    blockInfo.values.arrayValues = textareasArr[1].value;
                 }
                 break;
                 
             case 'ASSIGN':
                 const textareas = block.querySelectorAll('textarea');
+
                 if (textareas.length >= 2) {
                     blockInfo.values.variableName = textareas[0].value;
                     blockInfo.values.variableValue = textareas[1].value;
-                    console.log('ASSIGN values:', blockInfo.values); // Отладка
+                }
+                break;
+
+            case 'PRINT':
+                const varPrintInput = block.querySelector('.input');
+                
+                if (varPrintInput){
+                    blockInfo.values.variables = varPrintInput.value;
+
                 }
                 break;
             
@@ -62,8 +82,7 @@ function collectBlocksToArray() {
     }
     
     collectBlocks(startBlock);
-    
-    console.log('Собранные блоки:', blocksArray);
+
     return blocksArray;
 }
 
@@ -71,3 +90,5 @@ function findStartBlock() {
     const programSpace = document.getElementById('proramingSpace');
     return programSpace?.querySelector('.block-code[data-type="start"]') || null;
 }
+
+export { collectBlocksToArray };
