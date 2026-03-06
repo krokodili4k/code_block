@@ -35,15 +35,6 @@ function collectBlocksToArray() {
                 }
                 break;
             
-            case 'ARRAY':
-                const textareasArr = block.querySelectorAll('textarea');
-
-                if (textareasArr.length >= 2){
-                    blockInfo.values.arrayName = textareasArr[0].value;
-                    blockInfo.values.arrayValues = textareasArr[1].value;
-                }
-                break;
-                
             case 'ASSIGN':
                 const textareas = block.querySelectorAll('textarea');
 

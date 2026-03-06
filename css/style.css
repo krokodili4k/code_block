@@ -201,7 +201,7 @@ html, body {
     display: flex;
     justify-self: center;
     min-height: 32px;
-    min-w: 57px;
+    min-width: 57px;
     margin: 5px;
     padding: 0 10px;
     color: #d4d4d4;

@@ -1,10 +1,11 @@
 import ExpressionNode from "./ExpressionNode.js";
 
 export default class GetVariableNode extends ExpressionNode{
-    constructor(name){
+    constructor(name, index = null){
         super();
         this.type = "GET";
         this.name = name;
+        this.index = index;
     }
 
     evaluate(storage) {

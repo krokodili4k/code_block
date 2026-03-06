@@ -22,13 +22,13 @@ class Interpreter {
             if (!isNaN(value)) {
                 return new NumNode(value);
             }
-            
-           
             try {
                 const exprAst = parseExpression(value);      
                 const exprNode = BuildNodeTree(exprAst);    
                 return exprNode;
-            } catch (error) {
+
+            }
+             catch (error) {
                 console.log('Ошибка парсинга "${value}":', error);
                 return new NumNode(value);
             }
@@ -63,28 +63,26 @@ class Interpreter {
                     
                     return declareNodes;
                 }
-            
-            case 'ARRAY':
-                const arrName = astNode.values.arrayName;
-                
-                const arrValuesStr = astNode.values.arrayValues;
-                const arrValues = arrValuesStr.split(',').map(s => {
-                    const trimmed = s.trim();
-                    const num = Number(trimmed);
-                    return new NumNode(num);
-
-                });
-
-                return new DeclareArrayNode(arrName, arrValues);
                 
                 
             case 'ASSIGN':
-                const valueNode = this.createValueNode(astNode.values.variableValue);
+                const variableTo = astNode.values.variableName;
+                const varValuesMass = astNode.values.variableValue;
+                const varValues = varValuesMass.split(',').map(s => Number(s.trim()));
+                const arraySize = varValues.length;
+            
+                if (variableTo && varValues){
+
+                    const formulaNodes = varValues.map(value => new NumNode(value));
+
+                    return new AssignNode(
+                        variableTo,
+                        formulaNodes,
+                        arraySize
+                    );
+                }
+            
                 
-                return new AssignNode(
-                    astNode.values.variableName,
-                    valueNode 
-                );
             
             case 'PRINT':
                 const printValue = astNode.values.variables;
@@ -125,7 +123,7 @@ class Interpreter {
                 }
             });
         }
-        
+        console.log(storage);
         return this.variables;
     }
 }

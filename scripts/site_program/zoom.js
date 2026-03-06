@@ -7,6 +7,7 @@ let startX, startY;
 let translateX = 0, translateY = 0;
 let scale = 1;
 
+
 rightPanel.addEventListener('mousedown', (e) => {
     if (e.target.closest('.block-code')) return;
     
