@@ -14,6 +14,7 @@ but.addEventListener("click", function() {
     console.log(ast); 
     if (ast) {
         const interpreter = new Interpreter();
+
         try {
             const result = interpreter.run(ast); 
         } 

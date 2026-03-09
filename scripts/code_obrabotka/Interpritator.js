@@ -4,7 +4,6 @@ import NumNode from '../program_back/AST/NumNode.js';
 import PrintNode from '../program_back/AST/PrintNode.js';
 
 
-
 import { parseExpression } from './parser.js';
 import { BuildNodeTree } from './parser.js';
 import DeclareArrayNode from '../program_back/AST/DeclareArrayNode.js';
@@ -19,16 +18,16 @@ class Interpreter {
         };
     }
 
- 
     createValueNode(value) {
-      
+        
         if (typeof value === 'string') {
+
            
             if (!isNaN(value)) {
                 return new NumNode(value);
             }
             try {
-                const exprAst = parseExpression(value);      
+                const exprAst = parseExpression(value);                    
                 const exprNode = BuildNodeTree(exprAst);    
                 return exprNode;
 
@@ -71,21 +70,21 @@ class Interpreter {
                 
                 
             case 'ASSIGN':
-                const variableTo = astNode.values.variableName;
+                
+                let variableTo = astNode.values.variableName;
+                variableTo = this.createValueNode(variableTo);
+                
                 let varValue = astNode.values.variableValue;
-     
-                const varNodeType = this.storage.variables[variableTo].type;
+                varValue = varValue.split(',').map(s => this.createValueNode(s.trim()));       
 
-                if (varNodeType === 'VARIABLE'){
-
-                    varValue = this.createValueNode(varValue);  
-                }               
+                console.log(variableTo);
                 
 
                 if (variableTo && varValue){
                     return new AssignNode(
-                        variableTo,
+                        variableTo.name,
                         varValue,
+                        variableTo.index
                     );
                 }
             
@@ -95,6 +94,8 @@ class Interpreter {
                 const printValue = astNode.values.variables;
 
                 const printNode = this.createValueNode(printValue);
+                console.log(printNode);
+                
                 return new PrintNode(printNode);
 
                 
@@ -106,9 +107,6 @@ class Interpreter {
 
     run(programAST) {
         this.variables = {};
-        
-        
-        
         
         if (programAST.body && programAST.body.length > 0) {
             programAST.body.forEach(nodeJSON => {
@@ -130,7 +128,6 @@ class Interpreter {
             });
         }
 
-        console.log(this.storage);
         
         return this.variables;
     }

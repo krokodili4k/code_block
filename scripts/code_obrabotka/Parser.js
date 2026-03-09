@@ -46,6 +46,19 @@ function parseExpression(exprString) {
         if (!isNaN(expression)) {
             return { type: "NUM", value: parseFloat(expression) };
         }
+
+        const arrayMatch = expression.match(/^([a-zA-Z_][a-zA-Z0-9_]*)\[(.+)\]$/);
+        if (arrayMatch) {
+            const arrayName = arrayMatch[1];
+            const indexExpr = arrayMatch[2];
+
+            return {
+                type: "ARRAY_ELEMENT",
+                name: arrayName,
+                index: parse(indexExpr)
+            };
+        }
+
         if (/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(expression)) {
             return { type: "VAR", name: expression };
         }
@@ -65,6 +78,12 @@ function BuildNodeTree(ast)
     if (ast.type === "VAR")
     {
         return new GetVariableNode(ast.name)
+    }
+    if (ast.type === "ARRAY_ELEMENT") {
+        console.log(ast);
+        
+        const indexNode = BuildNodeTree(ast.index);
+        return new GetVariableNode(ast.name, indexNode);
     }
 
     if (ast.op)

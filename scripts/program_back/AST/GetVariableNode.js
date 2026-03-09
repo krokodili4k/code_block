@@ -5,7 +5,7 @@ export default class GetVariableNode extends ExpressionNode{
         super();
         this.type = "GET";
         this.name = name;
-        this.inext = index;
+        this.index = index;
     }
 
     evaluate(storage) {
@@ -16,19 +16,23 @@ export default class GetVariableNode extends ExpressionNode{
 
         const variable = storage.variables[this.name];
 
-        if (variable.type === "ARRAY"){
-            if (this.index === null){
-                throw new Error('Задайте индекс массива');
+        if (variable.type === "array"){
+
+            if (this.index !== null){
+                let ind;
+
+                if (this.index.type === "NUM" ) ind = this.index.evaluate();
+                else if (this.index.type === "VAR")ind = this.index.evaluate(storage);
+    
+                if (ind < 0 || ind >= variable.size) 
+                    throw new Error(`Индекс ${ind} вне границ массива "${this.name}" (размер ${variable.size})`);
+                
+                return variable.value[ind];
+            }
+            else{
+                return variable.value;
             }
 
-            let ind = this.index.evaluate(storage);
-
-            if (ind < 0 || ind >= variable.size) {
-                throw new Error(`Индекс ${ind} вне границ массива "${this.name}" (размер ${variable.size})`);
-            }
-
-            return variable.value[ind];
-            
         }
         else {
             return variable.value;

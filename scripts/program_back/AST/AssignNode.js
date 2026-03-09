@@ -10,37 +10,29 @@ export default class AssignNode extends StatementNode {
     }
 
     execute(storage){
-        const variableName = this.nameTo;
+        const variable = storage.variables[this.nameTo];
 
-        if (!storage.variables[variableName]) {
+        if (!variable) 
             throw new Error(`Переменная ${variableName} не объявлена`);
-        }
-
-        const variable = storage.variables[variableName];
-
+        else if (this.formula.length > variable.size && variable.size) 
+            throw new Error(`Слишком много аргументов размер массива ${variable.size}`);
+        else if (this.formula.length > 1)
+            throw new Error("Вы присваиваете элемнет к переменной, а не к массиву");
+        
+        
         if (variable.type === "ARRAY") {
             if (this.index !== null){
-                if (this.index < 0 || ind >= variable.size) {
-                    throw new Error(`Индекс ${this.index} вне границ массива "${variable.name}" (размер ${variable.size})`);
-                }
-
-                variable.value[this.index] = this.formula[0].evaluate(storage);
+                let ind = this.index.evaluate(storage);
+                variable.value[ind] = this.formula[0].evaluate();
             }
-            else {
-                this.formula = this.formula.split(',').map(s => Number(s.trim()));
-
-                if (this.formula.length > variable.size) {
-                    throw new Error(`Слишком много аргументов размер массива ${variable.size}`);
-                }
+            else 
+                for (let i = 0; i < this.formula.length; i++)
+                    variable.value[i] = this.formula[i].evaluate(); 
                 
-                for (let i = 0; i < this.formula.length; i++){
-                    variable.value[i] = this.formula[i]; 
-                }
-            }
-            
         } 
         else {
-            let value = this.formula.evaluate();  
+            
+            let value = this.formula[0].evaluate();  
             variable.value = value;
             
         }
