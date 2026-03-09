@@ -87,12 +87,12 @@
                             <div class="condition-row">
                                 <input type="text" class="input" id="input1_while_block" placeholder="значение 1">
                                 <select class="operator-select" id="selector_while_block">
-                                    <option value=">">></option>
-                                    <option value="<"><</option>
-                                    <option value="==">==</option>
-                                    <option value="!=">!=</option>
-                                    <option value=">=">>=</option>
-                                    <option value="<="><=</option>
+                                    <option value="more">&gt;</option>
+                                    <option value="less">&lt;</option>
+                                    <option value="equall">==</option>
+                                    <option value="notEquall">!=</option>
+                                    <option value="moreOrEquall">&gt;=</option>
+                                    <option value="lessorEquall">&lt;=</option>
                                 </select>
                                 <input type="text" class="input" id="input2_while_block" placeholder="значение 2">
                             </div>
@@ -106,33 +106,6 @@
                         </div>
                     </div>
                     
-                    <div class="block-code" draggable="true" data-type="IF">
-                        <div class="block-header">
-                            <span class="block-title">Если</span>
-                        </div>
-                        <div class="block-code-content">
-                            <div class="condition-row">
-                                <input type="text" class="input" id="input1_if_block" placeholder="значение 1">
-                                <select class="operator-select" id="selector_if_block">
-                                    <option value=">">></option>
-                                    <option value="<"><</option>
-                                    <option value="==">==</option>
-                                    <option value="!=">!=</option>
-                                    <option value=">=">>=</option>
-                                    <option value="<="><=</option>
-                                </select>
-                                <input type="text" class="input" id="input2_if_block" placeholder="значение 2">
-                            </div>
-                            
-                        </div>
-                        <div class="spawn-zone">
-
-                        </div>
-                        <div class="block-footer">
-                            <span class="block-title">Конец если</span>
-                        </div>
-                    </div>
-
                     <div class="block-code" draggable="true" data-type="IF-ELSE">
                         <div class="block-header">
                             <span class="block-title">Если</span>
@@ -141,12 +114,12 @@
                             <div class="condition-row">
                                 <input type="text" class="input" id="input1_if_else_block" placeholder="значение 1">
                                 <select class="operator-select" id="selector1_if_else_block">
-                                    <option value=">">></option>
-                                    <option value="<"><</option>
-                                    <option value="==">==</option>
-                                    <option value="!=">!=</option>
-                                    <option value=">=">>=</option>
-                                    <option value="<="><=</option>
+                                    <option value="more">&gt;</option>
+                                    <option value="less">&lt;</option>
+                                    <option value="equall">==</option>
+                                    <option value="notEquall">!=</option>
+                                    <option value="moreOrEquall">&gt;=</option>
+                                    <option value="lessorEquall">&lt;=</option>
                                 </select>
                                 <input type="text" class="input" id="input2_if_else_block" placeholder="значение 2">
                             </div>
@@ -199,7 +172,7 @@
     <script src="../scripts/site_program/zoom.js"></script>
     <script src="../scripts/site_program/console.js"></script>
     <script type="module" src="../scripts/kapot.js"></script>
-    <script src="../scripts/block-manager.js"></script>
+ 
     
 </body>
 </html>

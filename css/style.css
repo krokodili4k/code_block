@@ -303,8 +303,8 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 5000px;
-    height: 5000px;
+    width: 17000px;
+    height: 17000px;
     transform-origin: 0 0;
     background-image: radial-gradient(circle at 2px 2px, #672929 2px, transparent 2px);
     background-size: 25px 25px;

@@ -28,6 +28,8 @@ document.addEventListener('mousemove', (e) => {
     translateY = e.clientY - startY;
 
     
+    
+    
     updateTransform();
 });
 
@@ -42,7 +44,8 @@ rightPanel.addEventListener('wheel', (e) => {
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
     const newScale = scale * delta;
     
-    if (newScale < 0.1 || newScale > 2) return;
+    if (newScale <= 0.4 || newScale > 1.6) return;
+    
     
     const rect = rightPanel.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
@@ -60,6 +63,9 @@ rightPanel.addEventListener('wheel', (e) => {
 });
 
 function updateTransform() {
+    translateX = Math.min(0, translateX);
+    translateY = Math.min(0, translateY);
+
     workspaceCanvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
     updateCoordinates();
 }

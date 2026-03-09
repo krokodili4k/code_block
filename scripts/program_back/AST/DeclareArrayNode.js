@@ -6,8 +6,8 @@ export default class DeclareArrayNode extends StatementNode {
         super();
         this.type = "ARRAY";
         this.name = name;
-        this.values;
         this.size = size;
+        this.values;
     }
     
     execute(storage) {

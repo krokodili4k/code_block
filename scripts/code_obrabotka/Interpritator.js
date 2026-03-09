@@ -2,19 +2,24 @@ import DeclareVariable from '../program_back/AST/DeclareVariable.js';
 import AssignNode from '../program_back/AST/AssignNode.js';
 import NumNode from '../program_back/AST/NumNode.js';
 import PrintNode from '../program_back/AST/PrintNode.js';
-import Storage from '../program_back/Storage.js';
+
 
 
 import { parseExpression } from './parser.js';
 import { BuildNodeTree } from './parser.js';
 import DeclareArrayNode from '../program_back/AST/DeclareArrayNode.js';
+import GetVariableNode from '../program_back/AST/GetVariableNode.js';
 
 
 class Interpreter {
     constructor() {
         this.variables = {};
+        this.storage = {
+            variables: this.variables
+        };
     }
 
+ 
     createValueNode(value) {
       
         if (typeof value === 'string') {
@@ -67,18 +72,20 @@ class Interpreter {
                 
             case 'ASSIGN':
                 const variableTo = astNode.values.variableName;
-                const varValuesMass = astNode.values.variableValue;
-                const varValues = varValuesMass.split(',').map(s => Number(s.trim()));
-                const arraySize = varValues.length;
-            
-                if (variableTo && varValues){
+                let varValue = astNode.values.variableValue;
+     
+                const varNodeType = this.storage.variables[variableTo].type;
 
-                    const formulaNodes = varValues.map(value => new NumNode(value));
+                if (varNodeType === 'VARIABLE'){
 
+                    varValue = this.createValueNode(varValue);  
+                }               
+                
+
+                if (variableTo && varValue){
                     return new AssignNode(
                         variableTo,
-                        formulaNodes,
-                        arraySize
+                        varValue,
                     );
                 }
             
@@ -100,9 +107,8 @@ class Interpreter {
     run(programAST) {
         this.variables = {};
         
-        const storage = {
-            variables: this.variables
-        };
+        
+        
         
         if (programAST.body && programAST.body.length > 0) {
             programAST.body.forEach(nodeJSON => {
@@ -111,19 +117,21 @@ class Interpreter {
                 if (Array.isArray(nodes)){
                     nodes.forEach(node => {
                         if (node){
-                            node.execute(storage);
+                            node.execute(this.storage);
                         }
                     });
 
                 }
                 else {
                     if (nodes){
-                        nodes.execute(storage);
+                        nodes.execute(this.storage);
                     }
                 }
             });
         }
-        console.log(storage);
+
+        console.log(this.storage);
+        
         return this.variables;
     }
 }
