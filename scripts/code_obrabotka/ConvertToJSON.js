@@ -15,6 +15,7 @@ function convertToAST(blocksArray) {
             values: { ...block.values } 
         };
         
+        
         if (block.children && block.children.length > 0) {
             astNode.children = block.children.map(childId => {
                 const childBlock = blocksMap.get(childId);
@@ -31,7 +32,7 @@ function convertToAST(blocksArray) {
     
 
     const programAST = {
-        type: 'Program',
+        type: 'start',
         body: ast.children || [],
         sourceType: 'module'
     };

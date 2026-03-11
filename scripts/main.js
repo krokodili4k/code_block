@@ -2,7 +2,4 @@ import { initDragDrop, makeBlockDraggable, addDeleteButton } from "./site_progra
 
 document.addEventListener('DOMContentLoaded', () => {
     initDragDrop('proramingSpace'); 
-    
-    
-    
 });

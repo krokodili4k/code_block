@@ -37,6 +37,7 @@ export function findSpawnZoneAt(clientX, clientY, draggedBlock) {
     for (const el of elements) {
         if (!el.classList.contains('spawn-zone')) continue;
         if (draggedBlock && draggedBlock.contains(el)) continue;
+
         return el;
     }
     return null;
@@ -239,12 +240,13 @@ function _initWorkspaceEvents() {
         const tmp = document.createElement('div');
         tmp.innerHTML = payload.html;
         const newBlock = tmp.firstElementChild;
+        
 
         if (!newBlock) return;
 
         newBlock.classList.add('in-workspace');
         newBlock.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
-        newBlock.dataset.bid = payload.sourceId || 'b' + (++bidCounter);
+        newBlock.dataset.bid = payload.sourceId || 'b' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
 
         addDeleteButton(newBlock);
         makeBlockDraggable(newBlock);
