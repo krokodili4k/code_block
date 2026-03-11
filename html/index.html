@@ -18,8 +18,12 @@
         
                 <div class="panel-header">
                     <h3>BLOCKS</h3>
-                    <button class="btn" id="clear-block-btn">Очистить код</button>
+                    <button class="btn" id="clear-program-btn">Очистить код</button>
                     <button class="btn" id="run-program-btn">Запустить код</button>
+                    <div class="btn-space">
+                        <button class="btn" id="download-btn" >скачать</button>
+                        <button class="btn" id="import-btn" >импортировать</button>
+                    </div>
                 </div>
     
                 <div class="block-container">
@@ -163,12 +167,12 @@
     <div id="console-wrapper">
         <div id="console-tab" onclick="toggleConsole()">
             <div id="console-chervon"></div>
-            <button id="console-clear-but" onclick="event.stopPropagation(); clearConsole()">Очистить</button>
+            <button  id="console-clear-but" onclick="event.stopPropagation(); clearConsole()">Очистить</button>
         </div>
         <div id="console-body"></div>
     </div>
 
-    <script src="../scripts/site_program/drag_drop.js"></script>
+    <script type="module" src="../scripts/main.js"></script>
     <script src="../scripts/site_program/zoom.js"></script>
     <script src="../scripts/site_program/console.js"></script>
     <script type="module" src="../scripts/kapot.js"></script>

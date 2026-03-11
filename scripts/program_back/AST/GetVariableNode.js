@@ -10,32 +10,21 @@ export default class GetVariableNode extends ExpressionNode{
 
     evaluate(storage) {
 
-        if (storage.variables[this.name] === undefined) {
+        if (storage.variables[this.name] === undefined) 
             throw new Error(`Переменная "${this.name}" не объявлена`);
-        }
+        
 
         const variable = storage.variables[this.name];
 
-        if (variable.type === "array"){
+        if (variable.type === "array" && this.index !== null){ 
+            let ind = this.index.evaluate(storage);
 
-            if (this.index !== null){
-                let ind;
-
-                if (this.index.type === "NUM" ) ind = this.index.evaluate();
-                else if (this.index.type === "VAR")ind = this.index.evaluate(storage);
-    
-                if (ind < 0 || ind >= variable.size) 
-                    throw new Error(`Индекс ${ind} вне границ массива "${this.name}" (размер ${variable.size})`);
-                
-                return variable.value[ind];
-            }
-            else{
-                return variable.value;
-            }
-
+            if (ind < 0 || ind >= variable.size) 
+                throw new Error(`Индекс ${ind} вне границ массива "${this.name}" (размер ${variable.size})`);
+            
+            return variable.value[ind];
         }
-        else {
-            return variable.value;
-        }
+        return variable.value;
+        
     }
 }

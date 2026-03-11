@@ -7,7 +7,7 @@ export default class NumNode extends ExpressionNode{
         this.num = Number(num);
     }
 
-    evaluate(){
+    evaluate(storage){
         return this.num;
     }
 }

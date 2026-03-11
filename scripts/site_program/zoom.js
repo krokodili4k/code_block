@@ -44,7 +44,7 @@ rightPanel.addEventListener('wheel', (e) => {
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
     const newScale = scale * delta;
     
-    if (newScale <= 0.4 || newScale > 1.6) return;
+    if (newScale <= 0.5 || newScale > 1.4) return;
     
     
     const rect = rightPanel.getBoundingClientRect();

@@ -12,25 +12,6 @@ console.log = function(...args) {
     siteLog(args.map(formatArg).join(' '), false);
 };
 
-console.error = function(...args) {
-    originalConsole.error.apply(console, args);
-    siteLog(args.map(formatArg).join(' '), true);
-};
-
-console.warn = function(...args) {
-    originalConsole.warn.apply(console, args);
-    siteLog(args.map(formatArg).join(' '), false);
-};
-
-console.info = function(...args) {
-    originalConsole.info.apply(console, args);
-    siteLog(args.map(formatArg).join(' '), false);
-};
-
-console.debug = function(...args) {
-    originalConsole.debug.apply(console, args);
-    siteLog(args.map(formatArg).join(' '), false);
-};
 
 function formatArg(arg) {
     if (arg === null) 
@@ -53,10 +34,6 @@ function formatArg(arg) {
 
 window.addEventListener('error', function(event) {
     siteLog('Ошибка: ' + event.message + ' в ' + event.filename + ':' + event.lineno, true);
-});
-
-window.addEventListener('unhandledrejection', function(event) {
-    siteLog('Необработанный промис: ' + event.reason, true);
 });
 
 function siteLog(msg, isError = false){

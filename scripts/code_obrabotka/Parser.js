@@ -1,13 +1,14 @@
 
-import AddNode from '../program_back/AST/binary_operations/AddNode.js';
-import MinusNode from '../program_back/AST/binary_operations/MinusNode.js';
-import MultiplicationNode from '../program_back/AST/binary_operations/MultiplicationNode.js';
+import BinaryNode from '../program_back/AST/BinaryNode.js';
 import NumNode from '../program_back/AST/NumNode.js';
 import GetVariableNode from '../program_back/AST/GetVariableNode.js'
+import StringNode from '../program_back/AST/StringNode.js';
 
 
 function parseExpression(exprString) {
+
     exprString = exprString.replace(/\s+/g, '');
+    
     
     function parse(expression) {
         let level = 0;
@@ -43,9 +44,18 @@ function parseExpression(exprString) {
         if (expression.startsWith('(') && expression.endsWith(')')) {
             return parse(expression.slice(1, -1));
         }
+
         if (!isNaN(expression)) {
             return { type: "NUM", value: parseFloat(expression) };
         }
+
+        if ((expression.startsWith('"') && expression.endsWith('"')) || 
+            (expression.startsWith("'") && expression.endsWith("'"))) {
+            
+            const stringContent = expression.slice(1, -1);
+            return { type: "STRING", value: stringContent };
+        }
+        
 
         const arrayMatch = expression.match(/^([a-zA-Z_][a-zA-Z0-9_]*)\[(.+)\]$/);
         if (arrayMatch) {
@@ -75,13 +85,16 @@ function BuildNodeTree(ast)
     {
         return new NumNode(ast.value)
     }   
+    if (ast.type == "STRING")
+    {
+        return new StringNode(ast.value);
+    }
     if (ast.type === "VAR")
     {
         return new GetVariableNode(ast.name)
     }
-    if (ast.type === "ARRAY_ELEMENT") {
-        console.log(ast);
-        
+    if (ast.type === "ARRAY_ELEMENT") 
+    {
         const indexNode = BuildNodeTree(ast.index);
         return new GetVariableNode(ast.name, indexNode);
     }
@@ -93,15 +106,15 @@ function BuildNodeTree(ast)
         switch(ast.op)
         {
             case "+":
-                return new AddNode(left, right)
+                return new BinaryNode(left, right, "+")
             case "-":
-                return new MinusNode(left, right)
+                return new BinaryNode(left, right, "-")
             case "*":
-                return new MultiplicationNode(left, right)
+                return new BinaryNode(left, right, "*")
             case "/":
-                return new DivNode(left, right)
+                return new BinaryNode(left, right, "/")
             case "%":
-                return new RemainderNode(left, right)
+                return new BinaryNode(left, right, "%")
         }
     }
 }

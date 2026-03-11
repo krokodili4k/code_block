@@ -77,35 +77,54 @@ html, body {
     line-height: 1.5;
     letter-spacing: 0.3px;
     color: #fff;
+    transition: all 0.35s ease;
 }
 
+.btn:active {
+    transform: scale(0.8) translateY(2px) !important;
+}
+.btn-space{
+    display: flex;
+    gap: 20px;
+}
+
+
 #run-program-btn,
-#clear-block-btn {
-    background: linear-gradient(135deg, #8b2c2c 0%, #a52828 100%);
+#clear-program-btn {
     border: none;
-    color: white;
     cursor: pointer;
     padding: 8px 16px;
     border-radius: 4px;
-    font-family: inherit;
-    transition: all 0.2s ease;
-}
-
-#run-program-btn:hover,
-#clear-block-btn:hover {
-    transform: scale(0.95);
-    background: linear-gradient(135deg, #6b1f1f 0%, #7a1f1f 100%);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-
-#run-program-btn {
-    background: linear-gradient(135deg, #2d6a2d 0%, #5f874c 100%) !important;
     
 }
 
+#clear-program-btn{
+    background: linear-gradient(135deg, #8b2c2c 0%, #a52828 100%);
+}
+
+#clear-program-btn:hover {
+    background: linear-gradient(135deg, #6b1f1f 0%, #7a1f1f 100%);
+    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+#run-program-btn {
+    background: linear-gradient(135deg, #2d6a2d 0%, #5f874c 100%);
+}
+
 #run-program-btn:hover {
-    background: linear-gradient(135deg, #1f4f1f 0%, #3e6b2f 100%) !important;
+    background: linear-gradient(135deg, #205220 0%, #233d1a 100%) ;
+    box-shadow: inset 0 0 0 3px rgba(2, 3, 4, 0.3);
+}
+
+#download-btn,
+#import-btn {
+    background: linear-gradient(135deg, #868b2c 0%, #9fa528 100%);
+}
+
+#download-btn:hover,
+#import-btn:hover {
+    background: linear-gradient(135deg, #515220 0%, #333d1a 100%) ;
+    box-shadow: inset 0 0 0 3px rgba(2, 3, 4, 0.3);
 }
 
 .content {
@@ -113,6 +132,7 @@ html, body {
     display: flex;
     overflow: hidden;
 }
+
 
 .left-panel {
     width: 440px;
@@ -142,8 +162,6 @@ html, body {
     min-width: auto;
     border-radius: 8px;
     background: linear-gradient(145deg, #2d2d2d 0%, #262626 100%);
-   
-    
     font-family: 'Segoe UI', sans-serif;
     font-size: 13px;
 }
@@ -303,8 +321,8 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 17000px;
-    height: 17000px;
+    width: 50000px;
+    height: 50000px;
     transform-origin: 0 0;
     background-image: radial-gradient(circle at 2px 2px, #672929 2px, transparent 2px);
     background-size: 25px 25px;
@@ -477,6 +495,7 @@ html, body {
     padding: 0 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    transition: all 0.35s ease;
 }
 
 #console-clear-but:hover {
@@ -484,7 +503,7 @@ html, body {
 }
 
 #console-clear-but:active {
-    transform: scale(0.95);
+    transform: scale(0.8);
 }
 
 #console-clear-but:focus-visible {

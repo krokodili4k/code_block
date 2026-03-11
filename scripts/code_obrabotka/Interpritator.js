@@ -7,8 +7,6 @@ import PrintNode from '../program_back/AST/PrintNode.js';
 import { parseExpression } from './parser.js';
 import { BuildNodeTree } from './parser.js';
 import DeclareArrayNode from '../program_back/AST/DeclareArrayNode.js';
-import GetVariableNode from '../program_back/AST/GetVariableNode.js';
-
 
 class Interpreter {
     constructor() {
@@ -67,6 +65,7 @@ class Interpreter {
                     
                     return declareNodes;
                 }
+                break;
                 
                 
             case 'ASSIGN':
@@ -75,9 +74,7 @@ class Interpreter {
                 variableTo = this.createValueNode(variableTo);
                 
                 let varValue = astNode.values.variableValue;
-                varValue = varValue.split(',').map(s => this.createValueNode(s.trim()));       
-
-                console.log(variableTo);
+                varValue = varValue.split(',').map(s => this.createValueNode(s.trim()));   
                 
 
                 if (variableTo && varValue){
@@ -87,16 +84,14 @@ class Interpreter {
                         variableTo.index
                     );
                 }
+                break;
             
                 
             
             case 'PRINT':
                 const printValue = astNode.values.variables;
-
-                const printNode = this.createValueNode(printValue);
-                console.log(printNode);
-                
-                return new PrintNode(printNode);
+                const printNode = this.createValueNode(printValue);                                
+                return new PrintNode(printNode, printNode.index);
 
                 
             default:

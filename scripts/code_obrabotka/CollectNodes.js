@@ -29,6 +29,7 @@ function collectBlocksToArray() {
                 const typeVar = block.querySelector('.operator-select');
 
                 if (inputs[1] || (inputs[0] && inputs[1])) {
+                    
                     blockInfo.values.typeVar = typeVar.value;
                     blockInfo.values.arrSize = inputs[0].value;
                     blockInfo.values.variables = inputs[1].value;
