@@ -5,7 +5,7 @@ function Var(name, value) // <!-- Блок перезаписи переменн
 }
 
 function Arifmetic(operation, a, b) // <!-- Арифметика  -->
-{   
+{
     switch(operation)
     {
         case "+":

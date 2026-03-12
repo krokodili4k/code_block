@@ -7,7 +7,6 @@ let startX, startY;
 let translateX = 0, translateY = 0;
 let scale = 1;
 
-
 rightPanel.addEventListener('mousedown', (e) => {
     if (e.target.closest('.block-code')) return;
     
@@ -28,8 +27,6 @@ document.addEventListener('mousemove', (e) => {
     translateY = e.clientY - startY;
 
     
-    
-    
     updateTransform();
 });
 
@@ -44,8 +41,7 @@ rightPanel.addEventListener('wheel', (e) => {
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
     const newScale = scale * delta;
     
-    if (newScale <= 0.5 || newScale > 1.4) return;
-    
+    if (newScale < 0.1 || newScale > 2) return;
     
     const rect = rightPanel.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
@@ -63,9 +59,6 @@ rightPanel.addEventListener('wheel', (e) => {
 });
 
 function updateTransform() {
-    translateX = Math.min(0, translateX);
-    translateY = Math.min(0, translateY);
-
     workspaceCanvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
     updateCoordinates();
 }

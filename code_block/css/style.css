@@ -16,7 +16,7 @@ html, body {
     color: white;
     padding: 1rem;
     position: sticky;
-    border-bottom: 3px solid #007acc;
+    border-bottom: 3px solid #943c3c;
 }
 
 .logo {
@@ -33,13 +33,7 @@ html, body {
     position: sticky;
 }
 
-.container {
-    display: flex;
-    height: 100vh;
-    flex: 1 1;
-    overflow-y: auto;
-    min-height: 10;
-}
+
 
 .left-panel {
     width: 400px;
@@ -47,6 +41,7 @@ html, body {
     color: #fff;
     display: flex;
     flex-direction: column;
+    
     border-right: 2px solid #404040;
 }
 
@@ -82,22 +77,62 @@ html, body {
     line-height: 1.5;
     letter-spacing: 0.3px;
     color: #fff;
+    transition: all 0.35s ease;
 }
 
-#clear-block-btn{
+.btn:active {
+    transform: scale(0.8) translateY(2px) !important;
+}
+.btn-space{
+    display: flex;
+    gap: 20px;
+}
+
+
+#run-program-btn,
+#clear-program-btn {
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+    
+}
+
+#clear-program-btn{
     background: linear-gradient(135deg, #8b2c2c 0%, #a52828 100%);
+}
+
+#clear-program-btn:hover {
+    background: linear-gradient(135deg, #6b1f1f 0%, #7a1f1f 100%);
+    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 #run-program-btn {
     background: linear-gradient(135deg, #2d6a2d 0%, #5f874c 100%);
 }
 
+#run-program-btn:hover {
+    background: linear-gradient(135deg, #205220 0%, #233d1a 100%) ;
+    box-shadow: inset 0 0 0 3px rgba(2, 3, 4, 0.3);
+}
 
+#download-btn,
+#import-btn {
+    background: linear-gradient(135deg, #868b2c 0%, #9fa528 100%);
+}
+
+#download-btn:hover,
+#import-btn:hover {
+    background: linear-gradient(135deg, #515220 0%, #333d1a 100%) ;
+    box-shadow: inset 0 0 0 3px rgba(2, 3, 4, 0.3);
+}
 
 .content {
+    
     display: flex;
     overflow: hidden;
 }
+
 
 .left-panel {
     width: 440px;
@@ -127,7 +162,6 @@ html, body {
     min-width: auto;
     border-radius: 8px;
     background: linear-gradient(145deg, #2d2d2d 0%, #262626 100%);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     font-family: 'Segoe UI', sans-serif;
     font-size: 13px;
 }
@@ -175,12 +209,17 @@ html, body {
     
 }
 
+.delete-btn:hover{
+    transform: scale(0.95);
+    background-color: #73271f;
+}
+
 
 .operator-select {
     display: flex;
     justify-self: center;
-    height: 32px;
-    width: 57px;
+    min-height: 32px;
+    min-width: 57px;
     margin: 5px;
     padding: 0 10px;
     color: #d4d4d4;
@@ -195,34 +234,7 @@ html, body {
     background-color: #252525;
 }
 
-.block-varible {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px;
-    background-color: #2d2d2d;
-    border: 1px solid #404040;
-    border-radius: 8px;
-    margin: 7px 0 ;
-    width: 100%;
-    
-}
-
-.block-varible textarea {
-    background-color: #1a1a1a;
-    color: #d4d4d4;
-    border: 1px solid #3a3a3a;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    line-height: 1.5;
-    resize: both;
-    min-height: 36px;
-    max-height: 120px;
-    min-width: 120px;
-}
-
+.block-stroke,
 .condition-row {
     display: flex;
     align-items: center;
@@ -232,13 +244,13 @@ html, body {
     border: 1px solid #404040;
     border-radius: 8px;
     margin: 7px 0 ;
-    max-width: 100%;
+    width: 94%;
     
 }
 
-.input-left, .input-right {
+.block-stroke textarea,
+.input {
     flex: 1;
-    
     background-color: #1a1a1a;
     color: #fff; 
     border: 1px solid #3a3a3a;
@@ -257,8 +269,10 @@ html, body {
 .block-code-content {
     justify-content: center;
     display: flex;
+    flex-direction: column;
     gap: 5px;
     padding: 5px;
+    align-items: center;
 }
 
 .cycle-condition {
@@ -283,8 +297,10 @@ html, body {
 .spawn-zone {
     height:  37px;
     border: 3px solid #494949;
+    border-right: hidden;
     border-radius: 8px;
     margin: 10px; 
+    
 }
 
 .right-panel {
@@ -301,36 +317,22 @@ html, body {
 }
 
 #proramingSpace {
+    
     position: absolute;
     top: 0;
     left: 0;
-    width: 5000px;
-    height: 5000px;
+    width: 50000px;
+    height: 50000px;
     transform-origin: 0 0;
     background-image: radial-gradient(circle at 2px 2px, #672929 2px, transparent 2px);
     background-size: 25px 25px;
     background-color: #f5f5f5;
     background-repeat: repeat;
-    color: #ffffff
+    color: #ffffff;
+    cursor: crosshair;   
 
 
 }
-
-.coordinates {
-    position: fixed;
-    justify-self: center;
-    bottom: 20px;
-    left: calc(440px + 20px);
-    background: rgba(0,0,0,0.8);
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    border: 1px solid #007acc;
-    letter-spacing: 0.5px;
-}
-
 
 #console-wrapper {
     position: fixed;
@@ -354,6 +356,7 @@ html, body {
 
 
 #console-tab {
+    gap: 20px;
     height: 30px;
     background: #2d2d2d;
     cursor: pointer;
@@ -376,10 +379,11 @@ html, body {
     border-right: 6px solid transparent;
     border-top: 8px solid #00ff00;
     transition: transform 0.3s ease;
+    transform: rotate(180deg);
 }
 
 #console-wrapper.open #console-chervon {
-    transform: rotate(180deg);
+    transform: rotate(-90deg);
 }
 
 #console-body {
@@ -453,13 +457,14 @@ html, body {
 
 .coordinates {
     position: fixed;
+    
     bottom: 35px; 
     right: 20px;
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
     padding: 8px 16px;
     border-radius: 20px;
-    font-family: 'Courier New', monospace;
+    
     font-size: 14px;
     border: 1px solid #444;
     backdrop-filter: blur(5px);
@@ -473,3 +478,53 @@ html, body {
     bottom: 305px; 
 }
 
+#console-clear-but {
+    position: relative;
+    height: 20px;
+    border: none;
+    border-radius: 12px;
+    background-color: #a0372b;
+    color: white;
+    cursor: pointer;
+    font-size: 9px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    padding: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.35s ease;
+}
+
+#console-clear-but:hover {
+    background-color: #6d231b;
+}
+
+#console-clear-but:active {
+    transform: scale(0.8);
+}
+
+#console-clear-but:focus-visible {
+    outline: 2px solid #e74c3c;
+    outline-offset: 2px;
+}
+
+.spawn-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  min-height: 100px;
+  height: auto;
+  transition: min-height 0.3s ease;
+}
+
+.block-code .in-workspace {
+  transform: scale(1);
+
+  transform-origin: top left;
+  transition: transform 0.2s ease;
+  margin-bottom: calc((1 - 0.75) * -100%);
+}

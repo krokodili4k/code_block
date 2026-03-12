@@ -1,19 +1,30 @@
 import ExpressionNode from "./ExpressionNode.js";
 
 export default class GetVariableNode extends ExpressionNode{
-    constructor(name){
+    constructor(name, index = null){
         super();
         this.type = "GET";
         this.name = name;
+        this.index = index;
     }
 
-    evaluate(storage){
-        if (storage.varibles[this.name] !== undefined){
-            return storage.varibles[this.name].value;
+    evaluate(storage) {
 
-        }
+        if (storage.variables[this.name] === undefined) 
+            throw new Error(`Переменная "${this.name}" не объявлена`);
         
-        return undefined;
 
+        const variable = storage.variables[this.name];
+
+        if (variable.type === "array" && this.index !== null){ 
+            let ind = this.index.evaluate(storage);
+
+            if (ind < 0 || ind >= variable.size) 
+                throw new Error(`Индекс ${ind} вне границ массива "${this.name}" (размер ${variable.size})`);
+            
+            return variable.value[ind];
+        }
+        return variable.value;
+        
     }
 }
