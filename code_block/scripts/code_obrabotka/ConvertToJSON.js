@@ -24,7 +24,14 @@ function convertToAST(blocksArray) {
         } else {
             astNode.children = [];
         }
-        
+        if (block.values.branches) {
+            astNode.values.branches = {};
+            for (let [branchName, branchBlocks] of Object.entries(block.values.branches)) {
+                astNode.values.branches[branchName] = branchBlocks.map(childBlock => {
+                    return buildASTNode(childBlock);
+                });
+            }
+        }
         return astNode;
     }
     
@@ -33,7 +40,7 @@ function convertToAST(blocksArray) {
 
     const programAST = {
         type: 'start',
-        body: ast.children || [],
+        body: blocksArray.filter(block => block.type !== 'start').map(buildASTNode),
         sourceType: 'module'
     };
     

@@ -1,13 +1,32 @@
+
+
 function collectBlocksToArray() {
+
+    const blocksArray = [];
+    function collectChild(spawnZone, blockInfo, branchName) {
+        const childBlocks = spawnZone.querySelectorAll(':scope > .block-code');
+        
+        childBlocks.forEach(childBlock => {
+            const childInfo = collectBlocks(childBlock, blockInfo.id);
+            if (branchName) {
+                if (!blockInfo.values.branches) {
+                    blockInfo.values.branches = {};
+                }
+                if (!blockInfo.values.branches[branchName]) {
+                    blockInfo.values.branches[branchName] = [];
+                }
+                blockInfo.values.branches[branchName].push(childInfo);
+            }
+        });
+    }
+
     const startBlock = findStartBlock();
     
     if (!startBlock) {
         console.log('Start блок не найден');
         return [];
     }
-    
-    const blocksArray = [];
-    
+     
     function collectBlocks(block, parentId = null) {
         let blockId = block.dataset.bid;
         if (!blockId) {
@@ -50,26 +69,56 @@ function collectBlocksToArray() {
                 
                 if (varPrintInput){
                     blockInfo.values.variables = varPrintInput.value;
-
                 }
                 break;
-            
+
+            case 'IFELSE':
+                const condition = block.querySelector('.input');
+                
+                if (condition) {
+                    blockInfo.values.status = condition.value;
+                }
+                
+                blockInfo.values.branches = {
+                    if: [],
+                    else: []
+                };
+                const ifElseSpawnZone = block.querySelectorAll(':scope > .spawn-zone');
+                collectChild(ifElseSpawnZone[0], blockInfo, "if");
+                collectChild(ifElseSpawnZone[1], blockInfo, "else"); 
+                break;
+
+            case "WHILE":
+                const whileCondition = block.querySelector('.input');
+                
+                if (whileCondition) {
+                    blockInfo.values.condition = whileCondition.value;
+                }
+                const WhileSpawnZone = block.querySelector(':scope > .spawn-zone');
+                collectChild(WhileSpawnZone, blockInfo, "body");
+                break;
+
+            default:
+                console.log("Нет такого типа");
+                break;
+                
         }
         
 
         blocksArray.push(blockInfo);
-        
-        const spawnZones = block.querySelectorAll(':scope > .spawn-zone');
+        if (!["IFELSE", "WHILE"].includes(block.dataset.type)){
+            const spawnZones = block.querySelectorAll(':scope > .spawn-zone');
 
-        spawnZones.forEach(zone => {
-            const childBlocks = zone.querySelectorAll(':scope > .block-code');
+            spawnZones.forEach(zone => {
+                const childBlocks = zone.querySelectorAll(':scope > .block-code');
+                
+                childBlocks.forEach(childBlock => {
+                    const childInfo = collectBlocks(childBlock, blockInfo.id);
+                    blockInfo.children.push(childInfo.id);
             
-            childBlocks.forEach(childBlock => {
-                const childInfo = collectBlocks(childBlock, blockInfo.id);
-                blockInfo.children.push(childInfo.id);
+                });
             });
-        });
-        
+        }
         return blockInfo;
     }
     

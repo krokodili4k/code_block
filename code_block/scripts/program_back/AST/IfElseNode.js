@@ -7,17 +7,18 @@ export default class IfElseNode extends StatementNode{
         this.status = status;
         this.childrenTrue = childrenTrue;
         this.childrenFalse = childrenFalse;
+
     }
 
     execute(storage){
         const statusRes = this.status.evaluate(storage);
 
-        if (statusRes) {
+        if (Boolean(statusRes)) {
             for (let block of this.childrenTrue){
                 block.execute(storage);
             }
         }
-        else if (this.childrenFalse && this.childrenFalse.length > 0){
+        else {
             for (let block of this.childrenFalse){
                 block.execute(storage);
             }

@@ -1,4 +1,4 @@
-import ExpressionNode from "../ExpressionNode.js";
+import ExpressionNode from "../AST/ExpressionNode.js";
 
 export default class NotNode extends ExpressionNode {
     constructor(value){

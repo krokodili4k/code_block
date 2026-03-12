@@ -3,17 +3,17 @@ import AssignNode from '../program_back/AST/AssignNode.js';
 import NumNode from '../program_back/AST/NumNode.js';
 import PrintNode from '../program_back/AST/PrintNode.js';
 import IfElseNode from '../program_back/AST/IfElseNode.js';
+import Storage from '../program_back/Storage.js';
 
 import { parseExpression } from './Parser.js';
 import { BuildNodeTree } from './Parser.js';
 import DeclareArrayNode from '../program_back/AST/DeclareArrayNode.js';
+import WhileNode from '../program_back/AST/While.js';
 
 class Interpreter {
     constructor() {
         this.variables = {};
-        this.storage = {
-            variables: this.variables
-        };
+        this.storage = new Storage();
     }
 
     createValueNode(value) {
@@ -94,17 +94,26 @@ class Interpreter {
                 return new PrintNode(printNode, printNode.index);
 
             case "IFELSE":
-                const condition = this.createValueNode(astNode.values.condition)
+                const condition = this.createValueNode(astNode.values.status)
 
-                const childrenTrue = (astNode.childrenTrue).map(childJSON =>
+                const childrenTrue = (astNode.values?.branches?.if || []).map(childJSON =>
                     this.createNodeFromJSON(childJSON)
-                );
+                ).filter(node => node && typeof node.execute === "function");
 
-                const childrenFalse = (astNode.childrenFalse).map(childJSON =>
+                const childrenFalse = (astNode.values?.branches?.else || []).map(childJSON =>
                     this.createNodeFromJSON(childJSON)
-                )
+                ).filter(node => node && typeof node.execute === "function");
 
                 return new IfElseNode(condition, childrenTrue, childrenFalse);
+
+            case "WHILE":
+                const whileCondition = this.createValueNode(astNode.values.condition);
+
+                const body = (astNode.values.branches.body).map(nodeJSON =>
+                    this.createNodeFromJSON(nodeJSON)
+                ).filter(node => node && typeof node.execute === "function");
+
+                return new WhileNode(whileCondition, body)
             default:
                 console.log(`Неизвестный тип: ${astNode.type}`);
                 return null;
@@ -116,7 +125,7 @@ class Interpreter {
         
         if (programAST.body && programAST.body.length > 0) {
             programAST.body.forEach(nodeJSON => {
-                const nodes = this.createNodeFromJSON(nodeJSON);
+                const nodes = this.createNodeFromJSON(  nodeJSON);
 
                 if (Array.isArray(nodes)){
                     nodes.forEach(node => {

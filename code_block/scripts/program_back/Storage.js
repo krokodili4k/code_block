@@ -1,5 +1,5 @@
 export default class Storage{
     constructor(){
-        this.varibles = {};
+        variables: this.varibles = {};
     }
 }
