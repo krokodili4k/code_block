@@ -81,7 +81,7 @@ html, body {
 }
 
 .btn:active {
-    transform: scale(0.8) translateY(2px) !important;
+    transform: scale(0.8) translateY(2px);
 }
 .btn-space{
     display: flex;

@@ -116,6 +116,59 @@ function ApplyValues(htmlBlock, jsonBlock){
 
 }
 
+function removeAllIds(element) {
+    element.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+}
+
+function CreateStartBlock(ast){
+    const startBlock = createBlockFromType('start');
+                
+    startBlock.classList.add('in-workspace');
+    removeAllIds(startBlock);
+    startBlock.dataset.bid = ast.body[0].id;
+    startBlock.style.width = '400px';
+
+    addDeleteButton(startBlock);
+    makeBlockDraggable(startBlock);
+    placeOnWorkspace(startBlock, 700, 500);
+
+    return startBlock;
+
+}
+function CreateAndSetupChildBlock(block) {
+    const newBlock = createBlockFromType(block.type);
+    
+    ApplyValues(newBlock, block);
+    newBlock.classList.add('in-workspace');
+    
+    removeAllIds(newBlock);
+    newBlock.dataset.bid = block.id;
+    
+    addDeleteButton(newBlock);
+    makeBlockDraggable(newBlock);
+
+    console.log(newBlock);
+    
+
+    const spawnZone = newBlock.querySelector('.spawn-zone');
+    console.log(spawnZone);
+    
+    if (spawnZone){
+        console.log(newBlock.children);
+        
+        CreateChildBlocks(newBlock.children, spawnZone);
+    }
+    
+    return newBlock;
+}
+
+function CreateChildBlocks(blocks, spawnZone) {
+    blocks.forEach(block => {
+        const newBlock = CreateAndSetupChildBlock(block);
+        placeIntoZone(newBlock, spawnZone);
+    });
+}
+
 
 function ImportCode() {
     const fileInput = document.createElement('input');
@@ -132,35 +185,12 @@ function ImportCode() {
         reader.onload = function(e) {
             try {
                 const ast = JSON.parse(e.target.result);
-                const startBlock = createBlockFromType('start');
                 
-                startBlock.classList.add('in-workspace');
-                startBlock.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
-                startBlock.dataset.bid = ast.body[0].id;
-
-                addDeleteButton(startBlock);
-                makeBlockDraggable(startBlock);
-                placeOnWorkspace(startBlock, 700, 500);
-
+                const startBlock = CreateStartBlock(ast);
                 const spawnZone = startBlock.querySelector('.spawn-zone');
-                startBlock.style.width = '400px';
-
-                ast.body.forEach(block =>{
-                    const newBlock = createBlockFromType(block.type);
-                    console.log(newBlock);
-                    
-                    ApplyValues(newBlock, block);
-                    
-
-                    newBlock.classList.add('in-workspace');
-                    newBlock.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
-                    newBlock.dataset.bid = block.id;
-
-                    addDeleteButton(newBlock);
-                    makeBlockDraggable(newBlock);
-                    placeIntoZone(newBlock, spawnZone);                
-                    
-                });                
+                
+                CreateChildBlocks(ast.body, spawnZone);
+                        
 
             }
             catch (error) {
