@@ -1,0 +1,126 @@
+{
+  "type": "start",
+  "body": [
+    {
+      "type": "VARIABLE",
+      "id": "b1773427905591-t6f1ch8",
+      "values": {
+        "typeVar": "variable",
+        "arrSize": "",
+        "variables": "i, j, temp"
+      },
+      "children": []
+    },
+    {
+      "type": "VARIABLE",
+      "id": "b1773427918082-vluugx6",
+      "values": {
+        "typeVar": "array",
+        "arrSize": "4",
+        "variables": "arr"
+      },
+      "children": []
+    },
+    {
+      "type": "ASSIGN",
+      "id": "b1773427945191-jui9s2y",
+      "values": {
+        "variableName": "arr",
+        "variableValue": "7, 2, 1, 6"
+      },
+      "children": []
+    },
+    {
+      "type": "WHILE",
+      "id": "b1773427963960-p5jxgcp",
+      "values": {
+        "condition": "i< 3"
+      },
+      "children": [
+        {
+          "type": "WHILE",
+          "id": "b1773427974637-4swn4l0",
+          "values": {
+            "condition": "j < 3"
+          },
+          "children": [
+            {
+              "type": "IFELSE",
+              "id": "b1773427998308-f91ahp6",
+              "values": {
+                "condition": "arr[i] > arr[(j + 1)]"
+              },
+              "if": [
+                {
+                  "type": "ASSIGN",
+                  "id": "b1773428045828-20uh80k",
+                  "values": {
+                    "variableName": "temp",
+                    "variableValue": "arr[j]"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "ASSIGN",
+                  "id": "b1773428057277-0gn2yza",
+                  "values": {
+                    "variableName": "arr[j]",
+                    "variableValue": "arr[(j+1)]"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "ASSIGN",
+                  "id": "b1773428077215-g4ek39z",
+                  "values": {
+                    "variableName": "arr[(j+1)]",
+                    "variableValue": "temp"
+                  },
+                  "children": []
+                }
+              ],
+              "else": [],
+              "children": []
+            },
+            {
+              "type": "ASSIGN",
+              "id": "b1773428008891-rziqagt",
+              "values": {
+                "variableName": "j",
+                "variableValue": "j + 1"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "ASSIGN",
+          "id": "b1773427978364-t49rgo3",
+          "values": {
+            "variableName": "i",
+            "variableValue": "i + 1"
+          },
+          "children": []
+        },
+        {
+          "type": "ASSIGN",
+          "id": "b1773429673290-dcdjjam",
+          "values": {
+            "variableName": "j",
+            "variableValue": "0"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "PRINT",
+      "id": "b1773429681430-b6coynb",
+      "values": {
+        "variables": ""
+      },
+      "children": []
+    }
+  ],
+  "sourceType": "module"
+}
