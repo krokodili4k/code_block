@@ -12,7 +12,6 @@ console.log = function(...args) {
     siteLog(args.map(formatArg).join(' '), false);
 };
 
-
 function formatArg(arg) {
     if (arg === null) 
         return 'null';

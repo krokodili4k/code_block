@@ -241,8 +241,14 @@ function _initWorkspaceEvents() {
         tmp.innerHTML = payload.html;
         const newBlock = tmp.firstElementChild;
         
-
-        if (!newBlock) return;
+        let blocks = programmingSpace.querySelectorAll('.block-code');
+        let i = 0;
+        
+        blocks.forEach(block => {
+            if (block.dataset.type === 'start') i++;
+        });        
+        
+        if (!newBlock || (newBlock.dataset.type === 'start' && i >= 1)) return;
 
         newBlock.classList.add('in-workspace');
         newBlock.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));

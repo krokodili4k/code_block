@@ -27,9 +27,6 @@ document.addEventListener('mousemove', (e) => {
     translateX = e.clientX - startX;
     translateY = e.clientY - startY;
 
-    
-    
-    
     updateTransform();
 });
 

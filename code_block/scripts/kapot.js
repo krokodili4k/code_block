@@ -16,10 +16,8 @@ deleteProgramBtn.addEventListener("click", function() {
 
 function RunProgram(){
     const blocks = collectBlocksToArray();
-    // console.log(blocks);
     
     const ast = convertToAST(blocks);
-    // console.log(ast);
     
     if (ast) {
         const interpreter = new Interpreter();
