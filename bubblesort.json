@@ -16,7 +16,7 @@
       "id": "b1773427918082-vluugx6",
       "values": {
         "typeVar": "array",
-        "arrSize": "4",
+        "arrSize": "5",
         "variables": "arr"
       },
       "children": []
@@ -26,7 +26,7 @@
       "id": "b1773427945191-jui9s2y",
       "values": {
         "variableName": "arr",
-        "variableValue": "7, 2, 1, 6"
+        "variableValue": "75, 37, 25, 42, 15"
       },
       "children": []
     },
@@ -34,21 +34,21 @@
       "type": "WHILE",
       "id": "b1773427963960-p5jxgcp",
       "values": {
-        "condition": "i< 3"
+        "condition": "i< 4"
       },
       "children": [
         {
           "type": "WHILE",
           "id": "b1773427974637-4swn4l0",
           "values": {
-            "condition": "j < 3"
+            "condition": "j < 4"
           },
           "children": [
             {
               "type": "IFELSE",
               "id": "b1773427998308-f91ahp6",
               "values": {
-                "condition": "arr[i] > arr[(j + 1)]"
+                "condition": "arr[j] > arr[(j + 1)]"
               },
               "if": [
                 {
@@ -117,7 +117,7 @@
       "type": "PRINT",
       "id": "b1773429681430-b6coynb",
       "values": {
-        "variables": ""
+        "variables": "arr"
       },
       "children": []
     }
