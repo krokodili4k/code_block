@@ -42,26 +42,18 @@ function parseExpression(exprString) {
                 return {
                     op: "AND",
                     left: parse(expression.slice(0, i-2)),
-                    right: parse(expression.slice(i+3))
+                    right: parse(expression.slice(i+1))
                 }
             }
         }
 
-        level = 0;
-
-        for (let i = expression.length - 1; i >= 0; i--) {
-            const char = expression[i];
-
-            if (char === ')') level++;
-            else if (char === '(') level--;
-
-            if (level === 0 && i > 1 && expression.substr(i - 2, 3) === "NOT") {
-                return {
-                    op: "NOT",
-                    right: parse(expression.slice(i+3))
-                }
+        if (expression.startsWith("NOT")) {
+            return {
+                op: "NOT",
+                right: parse(expression.slice(3))
             }
         }
+        
 
         level = 0;
 
@@ -210,15 +202,18 @@ function BuildNodeTree(ast)
 
     if (ast.op)
     {
+        if (ast.op === "NOT"){
+            const right = BuildNodeTree(ast.right);
+            return new NotNode(right)
+        }
+
         const left = BuildNodeTree(ast.left);
         const right = BuildNodeTree(ast.right);
 
         if (ast.op === "AND" || ast.op === "OR"){
             return new LogicalNode(left, right, ast.op)
         }
-        if (ast.op === "NOT"){
-            return new NotNode(right)
-        }
+        
         if ([">", "<", "==", "!=", ">=", "<="].includes(ast.op)){
             return new CompareNode(left, right, ast.op)
         }

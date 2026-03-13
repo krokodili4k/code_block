@@ -3,12 +3,12 @@ import AssignNode from '../program_back/AST/AssignNode.js';
 import NumNode from '../program_back/AST/NumNode.js';
 import PrintNode from '../program_back/AST/PrintNode.js';
 import IfElseNode from '../program_back/AST/IfElseNode.js';
+import WhileNode from '../program_back/AST/WhileNode.js';
 import Storage from '../program_back/Storage.js';
 
 import { parseExpression } from './Parser.js';
 import { BuildNodeTree } from './Parser.js';
 import DeclareArrayNode from '../program_back/AST/DeclareArrayNode.js';
-import WhileNode from '../program_back/AST/While.js';
 
 class Interpreter {
     constructor() {
@@ -30,7 +30,7 @@ class Interpreter {
                 return exprNode;
 
             }
-             catch (error) {
+            catch (error) {
                 console.log('Ошибка парсинга "${value}":', error);
                 return new NumNode(value);
             }
@@ -94,26 +94,29 @@ class Interpreter {
                 return new PrintNode(printNode, printNode.index);
 
             case "IFELSE":
-                const condition = this.createValueNode(astNode.values.status)
-
-                const childrenTrue = (astNode.values?.branches?.if || []).map(childJSON =>
+                const condition = this.createValueNode(astNode.values.condition)
+                console.log(condition);
+                console.log(astNode);
+                
+                
+                const childrenTrue = (astNode.if).map(childJSON =>
                     this.createNodeFromJSON(childJSON)
-                ).filter(node => node && typeof node.execute === "function");
+                );
 
-                const childrenFalse = (astNode.values?.branches?.else || []).map(childJSON =>
+                const childrenFalse = (astNode.else).map(childJSON =>
                     this.createNodeFromJSON(childJSON)
-                ).filter(node => node && typeof node.execute === "function");
+                )
 
                 return new IfElseNode(condition, childrenTrue, childrenFalse);
 
             case "WHILE":
-                const whileCondition = this.createValueNode(astNode.values.condition);
-
-                const body = (astNode.values.branches.body).map(nodeJSON =>
-                    this.createNodeFromJSON(nodeJSON)
-                ).filter(node => node && typeof node.execute === "function");
-
-                return new WhileNode(whileCondition, body)
+                const whileCondition = this.createValueNode(astNode.values.condition); 
+                
+                const bodyNodes = (astNode.children || []).map(childJSON =>
+                    this.createNodeFromJSON(childJSON))
+                    .filter(node => node !== null);;
+                
+                return new WhileNode(whileCondition, bodyNodes);
             default:
                 console.log(`Неизвестный тип: ${astNode.type}`);
                 return null;
@@ -125,7 +128,7 @@ class Interpreter {
         
         if (programAST.body && programAST.body.length > 0) {
             programAST.body.forEach(nodeJSON => {
-                const nodes = this.createNodeFromJSON(  nodeJSON);
+                const nodes = this.createNodeFromJSON(nodeJSON);
 
                 if (Array.isArray(nodes)){
                     nodes.forEach(node => {

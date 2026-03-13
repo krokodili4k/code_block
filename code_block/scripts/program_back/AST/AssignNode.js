@@ -36,7 +36,7 @@ export default class AssignNode extends StatementNode {
             
         }  
 
-        let value = this.formula[0].evaluate();  
+        let value = this.formula[0].evaluate(storage);  
         variable.value = value;
 
     }

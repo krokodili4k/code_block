@@ -14,24 +14,47 @@ function convertToAST(blocksArray) {
             id: block.id,
             values: { ...block.values } 
         };
-        
+        if (block.type === 'IFELSE') {
+            const ifIds = block.children?.if ?? [];
+            const elseIds = block.children?.else ?? [];
+
+            astNode.if = ifIds
+                .map(childId => {
+                    const childBlock = blocksMap.get(childId);
+                    return childBlock ? buildASTNode(childBlock) : null;
+                })
+                .filter(node => node !== null);
+
+            astNode.else = elseIds
+                .map(childId => {
+                    const childBlock = blocksMap.get(childId);
+                    return childBlock ? buildASTNode(childBlock) : null;
+                })
+                .filter(node => node !== null);
+                astNode.children = [];
+            return astNode;
+        }
+
+        if (block.type === "WHILE") {
+            astNode.children = (block.children || [])
+                .map(childId => {
+                    const childBlock = blocksMap.get(childId);
+                    return childBlock ? buildASTNode(childBlock) : null;
+                })
+                .filter(node => node !== null);
+            return astNode;
+        }
         
         if (block.children && block.children.length > 0) {
             astNode.children = block.children.map(childId => {
                 const childBlock = blocksMap.get(childId);
                 return childBlock ? buildASTNode(childBlock) : null;
             }).filter(node => node !== null);
-        } else {
+        } 
+        else {
             astNode.children = [];
         }
-        if (block.values.branches) {
-            astNode.values.branches = {};
-            for (let [branchName, branchBlocks] of Object.entries(block.values.branches)) {
-                astNode.values.branches[branchName] = branchBlocks.map(childBlock => {
-                    return buildASTNode(childBlock);
-                });
-            }
-        }
+        
         return astNode;
     }
     
@@ -40,7 +63,7 @@ function convertToAST(blocksArray) {
 
     const programAST = {
         type: 'start',
-        body: blocksArray.filter(block => block.type !== 'start').map(buildASTNode),
+        body: ast.children || [],
         sourceType: 'module'
     };
     
