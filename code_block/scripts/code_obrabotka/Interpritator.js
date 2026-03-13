@@ -46,9 +46,10 @@ class Interpreter {
     createNodeFromJSON(astNode) {
         switch(astNode.type) {
             case 'VARIABLE':
-                const massVariables = astNode.values.variables;
+                let massVariables = astNode.values.variables;
+                massVariables = massVariables.replace(/\s+/g, '');
                 const variablesName = massVariables.split(',').map(s => s.trim());
-
+                
                 const varType = astNode.values.typeVar;
                 const arrSize = Number(astNode.values.arrSize);
 
@@ -71,12 +72,14 @@ class Interpreter {
             case 'ASSIGN':
                 
                 let variableTo = astNode.values.variableName;
-                variableTo = this.createValueNode(variableTo);
+                variableTo = variableTo.replace(/\s+/g, '');
+                variableTo = this.createValueNode(variableTo);                
                 
                 let varValue = astNode.values.variableValue;
-                varValue = varValue.split(',').map(s => this.createValueNode(s.trim()));   
+                varValue = varValue.replace(/\s+/g, '');
+                varValue = varValue.split(',').map(s => this.createValueNode(s));               
+                  
                 
-
                 if (variableTo && varValue){
                     return new AssignNode(
                         variableTo.name,
@@ -86,18 +89,19 @@ class Interpreter {
                 }
                 break;
             
-                
-            
-            case 'PRINT':
-                const printValue = astNode.values.variables;
-                const printNode = this.createValueNode(printValue);                                
+            case 'PRINT':                
+                let printValue = astNode.values.variables;
+                printValue = printValue.replace(/\s+/g, '');
+                const printNode = this.createValueNode(printValue);
+                                           
                 return new PrintNode(printNode, printNode.index);
 
             case "IFELSE":
-                const condition = this.createValueNode(astNode.values.condition)
-                console.log(condition);
-                console.log(astNode);
+                let con = astNode.values.condition;
+                con = con.replace(/\s+/g, '');
+
                 
+                const condition = this.createValueNode(con);              
                 
                 const childrenTrue = (astNode.if).map(childJSON =>
                     this.createNodeFromJSON(childJSON)
@@ -110,13 +114,16 @@ class Interpreter {
                 return new IfElseNode(condition, childrenTrue, childrenFalse);
 
             case "WHILE":
-                const whileCondition = this.createValueNode(astNode.values.condition); 
+                let conW = astNode.values.condition;
+                conW = conW.replace(/\s+/g, '');
+                const whileCondition = this.createValueNode(conW); 
                 
                 const bodyNodes = (astNode.children || []).map(childJSON =>
                     this.createNodeFromJSON(childJSON))
                     .filter(node => node !== null);;
                 
                 return new WhileNode(whileCondition, bodyNodes);
+
             default:
                 console.log(`Неизвестный тип: ${astNode.type}`);
                 return null;

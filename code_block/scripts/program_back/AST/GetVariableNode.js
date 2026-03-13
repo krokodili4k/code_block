@@ -15,8 +15,9 @@ export default class GetVariableNode extends ExpressionNode{
         
 
         const variable = storage.variables[this.name];
+        
 
-        if (variable.type === "array" && this.index !== null){ 
+        if (variable.type === "ARRAY" && this.index !== null){ 
             let ind = this.index.evaluate(storage);
 
             if (ind < 0 || ind >= variable.size) 

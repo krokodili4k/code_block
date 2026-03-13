@@ -10,7 +10,8 @@ export default class AssignNode extends StatementNode {
     }
 
     execute(storage){
-        const variable = storage.variables[this.nameTo];
+        const variable = storage.variables[this.nameTo];     
+        
 
         if (!variable) 
             throw new Error(`Переменная ${variableName} не объявлена`);
@@ -26,6 +27,7 @@ export default class AssignNode extends StatementNode {
 
             if (this.index !== null){
                 let ind = this.index.evaluate(storage);
+                
                 variable.value[ind] = this.formula[0].evaluate(storage);
                 return;
             }
@@ -35,7 +37,7 @@ export default class AssignNode extends StatementNode {
             return;
             
         }  
-
+        
         let value = this.formula[0].evaluate(storage);  
         variable.value = value;
 

@@ -9,7 +9,6 @@ import LogicalNode from '../program_back/conditional_operations/LogicalNode.js';
 
 function parseExpression(exprString) {
 
-    exprString = exprString.replace(/\s+/g, '');
     
     
     function parse(expression) {
@@ -126,6 +125,7 @@ function parseExpression(exprString) {
                 };
             }
         }
+
         level = 0;
         for (let i = expression.length - 1; i >= 0; i--) {
             const char = expression[i];
@@ -141,6 +141,7 @@ function parseExpression(exprString) {
                 };
             }
         }
+
         if (expression.startsWith('(') && expression.endsWith(')')) {
             return parse(expression.slice(1, -1));
         }
@@ -155,12 +156,14 @@ function parseExpression(exprString) {
             const stringContent = expression.slice(1, -1);
             return { type: "STRING", value: stringContent };
         }
-        
+        exprString = exprString.replace(/\s+/g, '');
+    
 
-        const arrayMatch = expression.match(/^([a-zA-Z_][a-zA-Z0-9_]*)\[(.+)\]$/);
+        const arrayMatch = expression.trim().match(/^([^\[]+?)\s*\[\s*(.*?)\s*\]$/);
+        
         if (arrayMatch) {
-            const arrayName = arrayMatch[1];
-            const indexExpr = arrayMatch[2];
+            const arrayName = arrayMatch[1].trim();
+            const indexExpr = arrayMatch[2].trim();       
 
             return {
                 type: "ARRAY_ELEMENT",
